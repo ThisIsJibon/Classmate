@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="797.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.RegistrationFormController">
+   <children>
+      <VBox layoutX="281.0" layoutY="113.0" prefHeight="285.0" prefWidth="235.0" spacing="22.0" styleClass="textfield">
+         <children>
+            <JFXTextField fx:id="nameField" promptText="Name" styleClass="textfield" unFocusColor="WHITE" />
+            <JFXTextField fx:id="usernameField" promptText="Username" styleClass="textfield" unFocusColor="WHITE" />
+            <JFXTextField fx:id="emailField" promptText="Email" styleClass="textfield" unFocusColor="WHITE" />
+            <JFXTextField fx:id="regField" promptText="Registration number" styleClass="textfield" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="passField" promptText="Password" styleClass="textfield" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="repeatPassField" promptText="Repeat Password" styleClass="textfield" unFocusColor="WHITE" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="closeButton" layoutX="413.0" layoutY="433.0" onAction="#closeButtonAction" prefHeight="33.0" prefWidth="102.0" styleClass="login-button" text="Close" />
+      <JFXButton fx:id="sighUpButton" layoutX="281.0" layoutY="433.0" onAction="#sighUpButtonAction" prefHeight="33.0" prefWidth="102.0" styleClass="login-button" text="Sign up" />
+      <Label layoutX="85.0" layoutY="24.0" prefHeight="47.0" prefWidth="162.0" text="Classmate." textFill="WHITE">
+         <font>
+            <Font name="French Script MT" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="40.0" fitWidth="49.0" layoutX="32.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/1.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

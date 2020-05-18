@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.CreateThreadController">
+   <children>
+      <Pane prefHeight="513.0" prefWidth="740.0" styleClass="root" stylesheets="@dark-theme.css">
+         <children>
+            <JFXTextField fx:id="threadNameField" layoutX="227.0" layoutY="127.0" prefHeight="43.0" prefWidth="288.0" promptText="Thread Name" styleClass="textfield" />
+            <JFXPasswordField fx:id="threadPasswordField" layoutX="227.0" layoutY="170.0" prefHeight="43.0" prefWidth="288.0" promptText="Thread Password" styleClass="textfield" />
+            <JFXButton fx:id="nowCreateThreadButton" layoutX="226.0" layoutY="391.0" onAction="#nowCreateThreadButtonAction" prefHeight="29.0" prefWidth="109.0" styleClass="login-button" text="Create Thread" />
+            <JFXButton fx:id="cancelThreadButton" layoutX="403.0" layoutY="391.0" onAction="#cancelThreadButtonAction" prefHeight="29.0" prefWidth="109.0" styleClass="login-button" text="Cancel" />
+            <ImageView fitHeight="21.0" fitWidth="15.0" layoutX="194.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="228.0" layoutY="14.0" prefHeight="35.0" prefWidth="215.0" text="Name your thread properly." textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="228.0" layoutY="39.0" prefHeight="35.0" prefWidth="215.0" text="Set a strong password. " textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="227.0" layoutY="64.0" prefHeight="35.0" prefWidth="383.0" text="Other members will use this password to join this thread." textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="21.0" fitWidth="15.0" layoutX="194.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="15.0" layoutX="194.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/1.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="threadYearField" layoutX="227.0" layoutY="213.0" prefHeight="43.0" prefWidth="288.0" promptText="Thread Year" styleClass="textfield" />
+            <TextField fx:id="threadDescField" layoutX="231.0" layoutY="287.0" prefHeight="79.0" prefWidth="281.0" promptText="Thread Description" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

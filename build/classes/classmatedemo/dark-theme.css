@@ -1,0 +1,37 @@
+* {
+    -fx-primary: #2B2B52;
+    -fx-secondary : #FFFFFF;
+    -fx-primarytext : #EAF0F1;
+}
+.root{
+    -fx-background-color: -fx-primary;
+     -fx-text-fill:  -fx-primarytext;
+}
+.button{
+    -fx-text-fill:  -fx-primarytext;
+}
+/*login button*/
+.login-button{
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius : 20px;
+    -fx-background-radius : 20px;
+}
+.textfield{
+    -fx-text-fill: -fx-primarytext;
+    -fx-prompt-text-fill: white;
+}
+.regWindow{
+    -fx-background-color: #FFFFFF;
+}
+.logout-button{
+    -fx-border-color: NULL;
+    -fx-border-radius : 10px;
+    -fx-background-radius : 10px;
+}
+/* for tab*/
+.tab{
+    -fx-background-color: -fx-primary;
+}
+.tab-header-background{
+    -fx-background-color: -fx-primary;
+}

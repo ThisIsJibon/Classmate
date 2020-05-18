@@ -1,0 +1,17 @@
+* {
+    -fx-primary: #dcc6e0;
+    -fx-secondary : #FFFFFF;
+    -fx-primarytext : #EAF0F1;
+}
+.root{
+    -fx-background-color: -fx-primary;
+     -fx-text-fill:  white;
+}
+.textfield{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-radius : 100px;
+    -fx-background-radius : 100px;
+}
