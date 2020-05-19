@@ -60,8 +60,8 @@ public class LoginPageController implements Initializable {
             alert.setContentText("Please enter your email & password correctly");
             alert.show();
 //            reseting user and pass field
-            emailField.setText("");
-            passField.setText("");
+            //emailField.setText("");
+            //passField.setText("");
         }
 
     }

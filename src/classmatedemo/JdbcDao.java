@@ -28,64 +28,9 @@ public class JdbcDao {
     private static final String check_query = "select *from registration where email = ? and pass = ?";
     private static final String insert = "INSERT INTO  thread (threadname,threadpass,threadyear,description,thread_id) VALUES (?, ?, ?, ?, ?)";
     private static final String get_thread ="select *from manage_thread where reg = ?";
-    private static final String upd_man_thread = "UPDATE thread SET threadpass = ?, description = ? WHERE threadname = ? and threadyear = ?";
     private static final String check_thread = "select * from thread where threadname = ? and threadyear = ? and threadpass = ?";
     private static final String delete_reg = "DELETE from manage_thread WHERE reg = ?";
     private static final String check_man_thread ="select * from manage_thread WHERE thread_id = ? and reg = ? ";
-
-
-
-
-
-
-    public String get_reg(String email,String query){
-         String rst ="";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        try(Connection connection = DriverManager
-                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1,email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next())
-             rst = resultSet.getString("reg");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-       return rst;
-    }
-
-
-    public String get_name(String email,String query){
-        String rst ="";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        try(Connection connection = DriverManager
-                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1,email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next())
-                rst = resultSet.getString("name");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return rst;
-    }
 
 
 
@@ -148,6 +93,61 @@ public class JdbcDao {
             printSQLException(e);
         }
     }
+
+
+    public void update_registration(String name,String username,String email,String pass,String repeatpass,String hometown,String cgpa,String semester,String bloodgroup,String cricket,String football,String handball,String volleyball,String basketball,String acting, String debate,String
+
+                                    dance,String music,String photography,String teacher,String student,String blood_donate_yes,String blood_donate_no,String reg,String pas,String query) throws SQLException {
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,username);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,pass);
+            preparedStatement.setString(5,repeatpass);
+            preparedStatement.setString(6,hometown);
+            preparedStatement.setString(7,cgpa);
+            preparedStatement.setString(8,semester);
+            preparedStatement.setString(9,bloodgroup);
+            preparedStatement.setString(10,cricket);
+            preparedStatement.setString(11,football);
+            preparedStatement.setString(12,handball);
+            preparedStatement.setString(13,volleyball);
+            preparedStatement.setString(14,basketball);
+            preparedStatement.setString(15,acting);
+            preparedStatement.setString(16,debate);
+            preparedStatement.setString(17,dance);
+            preparedStatement.setString(18,music);
+            preparedStatement.setString(19,photography);
+            preparedStatement.setString(20,teacher);
+            preparedStatement.setString(21,student);
+            preparedStatement.setString(22,blood_donate_yes);
+            preparedStatement.setString(23,blood_donate_no);
+            preparedStatement.setString(24,reg);
+            preparedStatement.setString(25,pas);
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+    }
+
+
 
 
 
@@ -401,6 +401,89 @@ public class JdbcDao {
 
 
 
+    public ArrayList<String> get_all_info (String email,String query){
+        try{
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            ArrayList<String> list = new ArrayList<String>();
+
+            try (Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1,email);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                String name = resultSet.getString("name");
+                String username = resultSet.getString("username");
+                String hometown = resultSet.getString("hometown");
+                String cgpa = resultSet.getString("cgpa");
+                String semester = resultSet.getString("semester");
+                String reg = resultSet.getString("reg");
+                String pass = resultSet.getString("pass");
+                String bloodgroup = resultSet.getString("bloodgroup");
+                String cricket = resultSet.getString("cricket");
+                String football = resultSet.getString("football");
+                String handball = resultSet.getString("handball");
+                String volleyball = resultSet.getString("volleyball");
+                String basketball = resultSet.getString("basketball");
+                String acting = resultSet.getString("acting");
+                String debate = resultSet.getString("debate");
+                String dance = resultSet.getString("dance");
+                String music = resultSet.getString("music");
+                String photography = resultSet.getString("photography");
+                String teacher = resultSet.getString("teacher");
+                String student = resultSet.getString("student");
+                String blood_donate_yes = resultSet.getString("blood_donate_yes");
+                String blood_donate_no = resultSet.getString("blood_donate_no");
+
+                list.add(name);
+                list.add(username);
+                list.add(hometown);
+                list.add(cgpa);
+                list.add(semester);
+                list.add(reg);
+                list.add(pass);
+                list.add(bloodgroup);
+                list.add(cricket);
+                list.add(football);
+                list.add(handball);
+                list.add(volleyball);
+                list.add(basketball);
+                list.add(acting);
+                list.add(debate);
+                list.add(dance);
+                list.add(music);
+                list.add(photography);
+                list.add(teacher);
+                list.add(student);
+                list.add(blood_donate_yes);
+                list.add(blood_donate_no);
+
+            } catch (Exception e) {
+                // print SQL exception information
+                e.printStackTrace();
+            }
+            return list;
+
+        }catch (Exception e) {
+            // print SQL exception information
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
+
+
     public ArrayList<String> threadlist (String reg){
         try{
 
@@ -487,7 +570,7 @@ public class JdbcDao {
 
 
 
-    public ArrayList<String> home_feed (String thread_id, String query){
+    public ArrayList<String> home_feed (String query){
         try{
 
             try {
@@ -502,9 +585,8 @@ public class JdbcDao {
             try (Connection connection = DriverManager
                     .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
-                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1,thread_id);
-                ResultSet resultSet = preparedStatement.executeQuery();
+                 Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(query);
                 while(resultSet.next()){
                     String name = resultSet.getString("name");
                     String thread__id= resultSet.getString("thread_id");
@@ -614,7 +696,7 @@ public class JdbcDao {
     }
 
 
-    public void UpdateRecord(String threadname,String threadyear,String threadpass,String description){
+    public void UpdateRecord(String threadname,String threadyear,String threadpass,String description,String query){
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -627,7 +709,7 @@ public class JdbcDao {
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
 
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(upd_man_thread)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, threadpass);
             preparedStatement.setString(2, description);
             preparedStatement.setString(3, threadname);
