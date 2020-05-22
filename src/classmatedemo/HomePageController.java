@@ -30,6 +30,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -146,16 +147,6 @@ public class HomePageController implements Initializable {
     private JFXButton ArchivesButton;
     @FXML
     private javafx.scene.control.ScrollPane feedScrollPane;
-
-    /**
-     * Initializes the controller class.
-     */
-
-    Preferences preferences = Preferences.userRoot();
-    public final  String email =preferences.get("email","root");
-    public String selected;
-    public String reg;
-    public String name;
     @FXML
     private JFXListView<String> threadListView;
     @FXML
@@ -181,7 +172,7 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXTextField accountCGPA;
     @FXML
-    private JFXComboBox<?> bloodGroupComboBox;
+    private JFXComboBox<String> bloodGroupComboBox;
     @FXML
     private JFXPasswordField changePasswordField;
     @FXML
@@ -214,17 +205,33 @@ public class HomePageController implements Initializable {
     private JFXCheckBox bloodYesCheck;
     @FXML
     private JFXCheckBox bloodNoCheck;
+
+
+
+
+    /**
+     * Initializes the controller class.
+     */
+    Preferences preferences = Preferences.userRoot();
+    public final  String email =preferences.get("email","root");
+    public String selected;
+    public  String reg;
+    public String name;
+    public String password;
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //loadGraphData(); // loads cgpa graph
-        String get_reg = "select *from registration where email = ?";
-        String get_name = "select * from registration where email = ?";
+
+        String query = "select * from registration where email = ? ";
         JdbcDao jdbc = new JdbcDao();
-        reg = jdbc.get_reg(email,get_reg);
-        name = jdbc.get_name(email,get_name);
+        ArrayList<String> list = jdbc.get_all_info(email,query);
+
+        reg=list.get(5);
+
         System.out.println(reg);
-        System.out.println(name);
 
     }
 
@@ -249,21 +256,28 @@ public class HomePageController implements Initializable {
         homePane.toFront();
         homeListView.getItems().clear();
 
-        String query = "select * from news_feed where thread_id = ? order by date desc ";
-        String query1 = "select * from manage_thread where reg = ? ";
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
+        String query ="select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
 
-        ArrayList <String> items = jdbc.get_all_thread(reg,query1);
+        ArrayList <String> items = jdbc.threadlist(reg,query1);
 
 
-        for(String str : items){
-            ArrayList<String> list = jdbc.home_feed(str,query);
-            for(String strr : list){
-                System.out.println(strr);
-                homeListView.getItems().add(strr);
-            }
+
+        for(int i=0;i<items.size();i++){
+            if(i==items.size()-1)
+                query+=("thread_id = \""+items.get(i)+"\" order by  date desc");
+            else
+                query+=("thread_id = \""+items.get(i)+"\"  OR ");
        }
+        System.out.println(query);
+        ArrayList<String> list = jdbc.home_feed(query);
+
+        for(String strr : list){
+            System.out.println(strr);
+            homeListView.getItems().add(strr);
+        }
     }
 
     @FXML
@@ -271,8 +285,12 @@ public class HomePageController implements Initializable {
         threadPane.toFront();
 
         threadComboBox.getItems().clear();
+        threadListView.getItems().clear();
+
+        String query = "select *from manage_thread where reg = ? order by thread_id asc";
+
         JdbcDao jdbc = new JdbcDao();
-        ArrayList<String> list = jdbc.threadlist(reg);
+        ArrayList<String> list = jdbc.threadlist(reg,query);
         for(String str : list) {
             threadComboBox.getItems().add(str);
         }
@@ -296,20 +314,25 @@ public class HomePageController implements Initializable {
         timelinePane.toFront();
         timelineListView.getItems().clear();
 
-        String query = "select * from news_feed where thread_id = ? order by date desc ";
-        String query1 = "select * from manage_thread where reg = ? ";
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
+        String query ="select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
 
-        ArrayList <String> items = jdbc.get_all_thread(reg,query1);
+        ArrayList <String> items = jdbc.threadlist(reg,query1);
 
 
-        for(String str : items){
-            ArrayList<String> list = jdbc.home_feed(str,query);
-            for(String strr : list){
-                System.out.println(strr);
-                timelineListView.getItems().add(strr);
-            }
+        for(int i=0;i<items.size();i++){
+            if(i==items.size()-1)
+                query+=("thread_id = \""+items.get(i)+"\" order by date desc");
+            else
+                query+=("thread_id = \""+items.get(i)+"\"  OR ");
+        }
+        System.out.println(query);
+        ArrayList<String> list = jdbc.home_feed(query);
+        for(String strr : list){
+            System.out.println(strr);
+            timelineListView.getItems().add(strr);
         }
     }
 
@@ -331,6 +354,123 @@ public class HomePageController implements Initializable {
     @FXML
     private void acoountButtonAction(ActionEvent event) {
         accountPane.toFront();
+
+        JdbcDao jdbc = new JdbcDao();
+
+        String query = "select * from registration where email = ? ";
+        ArrayList<String> list = jdbc.get_all_info(email,query);
+        for(String str : list){
+            System.out.println(str);
+        }
+        bloodGroupComboBox.getItems().clear();
+
+        bloodGroupComboBox.getItems().addAll(
+                  "A+",
+                           "A-",
+                           "B+",
+                           "B-",
+                           "AB+",
+                           "AB-",
+                           "O+",
+                           "O-"
+        );
+
+        password = list.get(6);
+        accountName.setText(list.get(0));
+        accountReg.setText(list.get(5));
+        accountEmail.setText(email);
+        accountUsername.setText(list.get(1));
+        accountHometown.setText(list.get(2));
+        accountCGPA.setText(list.get(3));
+        accountSemester.setText(list.get(4));
+        bloodGroupComboBox.getSelectionModel().select(list.get(7));
+
+        if(list.get(8).equals("1")){
+            cricketCheck.setSelected(true);
+        }
+        else{
+            cricketCheck.setSelected(false);
+        }
+        if(list.get(9).equals("1")){
+            footballCheck.setSelected(true);
+        }
+        else{
+            footballCheck.setSelected(false);
+        }
+        if(list.get(10).equals("1")){
+            handballCheck.setSelected(true);
+        }
+        else{
+            handballCheck.setSelected(false);
+        }
+        if(list.get(11).equals("1")){
+            volleyballCheck.setSelected(true);
+        }
+        else{
+            volleyballCheck.setSelected(false);
+        }
+        if(list.get(12).equals("1")){
+            basketballCheck.setSelected(true);
+        }
+        else{
+            basketballCheck.setSelected(false);
+        }
+        if(list.get(13).equals("1")){
+            actingCheck.setSelected(true);
+        }
+        else{
+            actingCheck.setSelected(false);
+        }
+        if(list.get(14).equals("1")){
+            debateCheck.setSelected(true);
+        }
+        else{
+            debateCheck.setSelected(false);
+        }
+        if(list.get(15).equals("1")){
+            danceCheck.setSelected(true);
+        }
+        else{
+            danceCheck.setSelected(false);
+        }
+        if(list.get(16).equals("1")){
+            musicCheck.setSelected(true);
+        }
+        else{
+            musicCheck.setSelected(false);
+        }
+        if(list.get(17).equals("1")){
+            photographyCheck.setSelected(true);
+        }
+        else{
+            photographyCheck.setSelected(false);
+        }
+        if(list.get(18).equals("1")){
+            teacherCheck.setSelected(true);
+        }
+        else{
+            teacherCheck.setSelected(false);
+        }
+        if(list.get(19).equals("1")){
+            studentCheck.setSelected(true);
+        }
+        else{
+            studentCheck.setSelected(false);
+        }
+        if(list.get(20).equals("1")){
+            bloodYesCheck.setSelected(true);
+        }
+        else{
+            bloodYesCheck.setSelected(false);
+        }
+        if(list.get(21).equals("1")){
+            bloodNoCheck.setSelected(true);
+        }
+        else{
+            bloodNoCheck.setSelected(false);
+        }
+
+
     }
 
     @FXML
@@ -367,6 +507,14 @@ public class HomePageController implements Initializable {
     @FXML
     private void postInThreadButtonAction(ActionEvent event) throws SQLException {
 
+
+        String info_query = "select * from registration where email = ? ";
+        JdbcDao jdbc = new JdbcDao();
+        ArrayList<String> list = jdbc.get_all_info(email,info_query);
+
+        name=list.get(0);
+
+
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         Date dateobj = new Date();
         System.out.println(df.format(dateobj));
@@ -376,8 +524,7 @@ public class HomePageController implements Initializable {
 
         String feed = postInThreadTextfield.getText();
         String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
-        JdbcDao jdbc = new JdbcDao();
-        jdbc.insertRecord_feed(name,reg,selected,feed,df.format(dateobj),query);
+        jdbc.insertRecord_feed(name.toUpperCase(),reg,selected,feed,df.format(dateobj),query);
 
 
 
@@ -411,7 +558,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void AboutButtonAction(ActionEvent actionEvent) {
+    private void AboutButtonAction(ActionEvent actionEvent) {
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from thread where thread_id = ?";
         String ans = jdbc.get_about(selected,query);
@@ -419,7 +566,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void FeedButtonAction(ActionEvent actionEvent) {
+    private void FeedButtonAction(ActionEvent actionEvent) {
 
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from news_feed where thread_id = ? order by date desc ";
@@ -433,11 +580,11 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void ResourcesButtonAction(ActionEvent actionEvent) {
+    private void ResourcesButtonAction(ActionEvent actionEvent) {
     }
 
     @FXML
-    public void MembersButtonAction(ActionEvent actionEvent) {
+    private void MembersButtonAction(ActionEvent actionEvent) {
 
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from manage_thread where thread_id = ? ";
@@ -449,14 +596,169 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void ArchivesButtonAction(ActionEvent actionEvent) {
+    private void ArchivesButtonAction(ActionEvent actionEvent) {
 
 
 
     }
 
     @FXML
-    private void accountApplyButtonAction(ActionEvent event) {
+    private void accountApplyButtonAction(ActionEvent event)  throws SQLException {
+
+        String query = "UPDATE registration SET name = ? , username = ? , email = ? , pass = ? , repeatPass = ? , hometown = ? , cgpa = ? , semester = ? , bloodgroup = ?,cricket = ?, football = ?,handball = ?, volleyball = ?, basketball = ?, acting = ?, debate = ?, dance = ?, music = ?, photography = ?, teacher = ?, student = ?, blood_donate_yes = ?, blood_donate_no = ?  WHERE reg = ? and pass = ? ";
+
+        if(accountPasswordField.getText().isEmpty() || (!accountPasswordField.getText().equals(password)) ){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Please enter your Password Correctly");
+            alert.show();
+
+        }
+        else if((teacherCheck.isSelected() && studentCheck.isSelected()  ) || (bloodYesCheck.isSelected() && bloodNoCheck.isSelected())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setContentText("Select One of your role & donate blood");
+            alert.show();
+        }
+        else{
+
+            String  pass;
+            if(changePasswordField.getText().isEmpty()){
+                pass = password;
+            }
+            else{
+                pass = changePasswordField.getText();
+            }
+
+            String name = accountName.getText();
+            String username = accountUsername.getText();
+            String email = accountEmail.getText();
+            String hometown = accountHometown.getText();
+            String cgpa = accountCGPA.getText();
+            String semester = accountSemester.getText();
+            String bloodgroup = bloodGroupComboBox.getSelectionModel().getSelectedItem();
+
+            String cricket;
+            String football;
+            String handball;
+            String volleyball;
+            String basketball;
+            String acting;
+            String debate;
+            String dance;
+            String music;
+            String photography;
+            String teacher;
+            String student;
+            String blood_donate_yes;
+            String blood_donate_no;
+
+            if(cricketCheck.isSelected()){
+                cricket="1";
+            }
+            else{
+                cricket="0";
+            }
+            if(footballCheck.isSelected()){
+                football="1";
+            }
+            else{
+                football="0";
+            }
+            if(handballCheck.isSelected()){
+                handball="1";
+            }
+            else{
+                handball="0";
+            }
+            if(volleyballCheck.isSelected()){
+                volleyball="1";
+            }
+            else{
+                volleyball="0";
+            }
+            if(basketballCheck.isSelected()){
+                basketball="1";
+            }
+            else{
+                basketball="0";
+            }
+            if(actingCheck.isSelected()){
+                acting="1";
+            }
+            else{
+                acting="0";
+            }
+            if(debateCheck.isSelected()){
+                debate="1";
+            }
+            else{
+                debate="0";
+            }
+            if(danceCheck.isSelected()){
+                dance="1";
+            }
+            else{
+                dance="0";
+            }
+            if(musicCheck.isSelected()){
+                music="1";
+            }
+            else{
+                music="0";
+            }
+            if(photographyCheck.isSelected()){
+                photography="1";
+            }
+            else{
+                photography="0";
+            }
+            if(teacherCheck.isSelected()){
+                teacher="1";
+            }
+            else{
+                teacher="0";
+            }
+            if(studentCheck.isSelected()){
+                student="1";
+            }
+            else{
+                student="0";
+            }
+
+            if(bloodYesCheck.isSelected()){
+                blood_donate_yes="1";
+            }
+            else{
+                blood_donate_yes="0";
+            }
+            if(bloodNoCheck.isSelected()){
+                blood_donate_no="1";
+            }
+            else{
+                blood_donate_no="0";
+            }
+
+            JdbcDao jdb = new JdbcDao();
+            jdb.update_registration(name,username,email,pass,pass,hometown,cgpa,semester,bloodgroup,cricket,football,handball,volleyball,basketball,acting,debate,dance,music,photography,teacher,student,blood_donate_yes,blood_donate_no,reg,accountPasswordField.getText(),query);
+            System.out.println("successful");
+            accountPasswordField.setText("");
+
+            String info_query = "select * from registration where email = ? ";
+            ArrayList<String> list = jdb.get_all_info(email,info_query);
+
+            if(name != list.get(0)){
+                String update_query = "UPDATE news_feed SET name = ? where reg =? ";
+                jdb.update_name_news_feed(reg,name.toUpperCase(),update_query);
+            }
+
+
+
+        }
+
+
+
+
     }
 
     @FXML

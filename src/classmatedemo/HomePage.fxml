@@ -584,7 +584,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Label>
-                                    <JFXCheckBox fx:id="cricketCheck" prefHeight="18.0" prefWidth="139.0" text="Cricket" />
+                                    <JFXCheckBox fx:id="cricketCheck"  prefHeight="18.0" prefWidth="139.0" text="Cricket" />
                                     <JFXCheckBox fx:id="footballCheck" prefHeight="18.0" prefWidth="139.0" text="Football" />
                                     <JFXCheckBox fx:id="handballCheck" prefHeight="18.0" prefWidth="139.0" text="Handball" />
                                     <JFXCheckBox fx:id="volleyballCheck" prefHeight="18.0" prefWidth="139.0" text="Volleyball" />

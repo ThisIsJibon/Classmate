@@ -84,7 +84,7 @@ public class RegistrationFormController implements Initializable {
             return;
         }
         String query = "select *from registration where email = ? ";
-        if(JdbcDao.check_email(emailField.getText(),query)){
+        if(JdbcDao.check_data(emailField.getText(),query)){
             showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This Email id : "+emailField.getText()+" already exists.Use another Email id.");
             return;
         }

@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,40 +67,60 @@ public class ManageThreadController implements Initializable {
             alert.show();
         }
 
-        if(threadYearField.getText().isEmpty()){
+        else if(threadYearField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Thread Year");
             alert.show();
         }
-        if(userRegistrationField.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("warning");
-            alert.setContentText("Please enter your Registration Number");
-            alert.show();
-        }
-        if(threadPassField.getText().isEmpty()){
+        else if(threadPassField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Thread Password");
             alert.show();
         }
-
-        String threadname = threadNameField.getText();
-        String threadyear = threadYearField.getText();
-        String threadpass = threadPassField.getText();
-        String reg = userRegistrationField.getText();
-
-        if(JdbcDao.checkthread(threadname,threadyear,threadpass)){
-            JdbcDao jdbc = new JdbcDao();
-            jdbc.insertRecord(threadname+"-"+threadyear,reg);
-        }
-        else{
+        else if(userRegistrationField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
-            alert.setContentText("Please enter all Information correctly");
+            alert.setContentText("Please enter Registration Number");
             alert.show();
         }
+
+        else{
+
+            String check_query = " select * from manage_thread where reg = ? and thread_id = ? ";
+            String query = "select * from thread where threadname = ? and threadyear = ? and threadpass = ?";
+            String insert_query = "INSERT INTO  manage_thread(thread_id,reg) VALUES (?, ?)";
+
+            String threadname = threadNameField.getText();
+            String threadyear = threadYearField.getText();
+            String threadpass = threadPassField.getText();
+            String reg = userRegistrationField.getText();
+
+            if(JdbcDao.check_thread(threadname,threadyear,threadpass,query)){
+
+                if(JdbcDao.check_user(reg,threadname+"-"+threadyear,check_query)){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information");
+                    alert.setContentText("This Registration Number user is already added in this Course");
+                    alert.show();
+                }
+                else{
+                    JdbcDao jdbc = new JdbcDao();
+                    jdbc.insertRecord(threadname+"-"+threadyear,reg,insert_query);
+                }
+
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("warning");
+                alert.setContentText("Please enter all Information correctly");
+                alert.show();
+            }
+
+
+        }
+
 
     }
 
@@ -113,40 +134,51 @@ public class ManageThreadController implements Initializable {
             alert.show();
         }
 
-        if(threadYearField.getText().isEmpty()){
+        else if(threadYearField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Thread Year");
             alert.show();
         }
-        if(threadPassField.getText().isEmpty()){
+        else if(threadPassField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Thread Password");
             alert.show();
         }
-        if(userRegistrationField.getText().isEmpty()){
+        else if(userRegistrationField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Registration Number");
             alert.show();
         }
-
-        String threadname = threadNameField.getText();
-        String threadpass = threadPassField.getText();
-        String threadyear = threadYearField.getText();
-        String reg = userRegistrationField.getText();
-
-        if(JdbcDao.check_man_thread(threadname+"-"+threadyear,reg)&&JdbcDao.checkthread(threadname,threadyear,threadpass)){
-            JdbcDao jdbc = new JdbcDao();
-            jdbc.deleteRecord(reg);
-        }
         else{
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("warning");
-            alert.setContentText("You are not registered in this course or check all information correctly");
-            alert.show();
+
+            String threadname = threadNameField.getText();
+            String threadpass = threadPassField.getText();
+            String threadyear = threadYearField.getText();
+            String reg = userRegistrationField.getText();
+            String thread_id = threadNameField.getText()+"-"+threadYearField.getText();
+
+            String remove_query = "DELETE from manage_thread WHERE reg = ? and thread_id =? ";
+            String thread_query = "select * from thread where threadname = ? and threadyear = ? and threadpass = ?";
+            String manage_thread_query = "select * from manage_thread WHERE thread_id = ? and reg = ? ";
+
+            if(JdbcDao.check_thread(threadname,threadyear,threadpass,thread_query)&&JdbcDao.check_man_thread(thread_id,reg,manage_thread_query)){
+                JdbcDao jdbc = new JdbcDao();
+                jdbc.deleteRecord(reg,thread_id,remove_query);
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("warning");
+                alert.setContentText("You are not registered in this course or check all information correctly");
+                alert.show();
+            }
+
+
         }
+
+
 
     }
 
@@ -167,19 +199,46 @@ public class ManageThreadController implements Initializable {
             alert.show();
         }
 
-        if(threadYearField.getText().isEmpty()){
+        else if(threadYearField.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("warning");
             alert.setContentText("Please enter your Thread Year");
             alert.show();
         }
-        String threadname = threadNameField.getText();
-        String threadyear = threadYearField.getText();
-        String threadpass = threadPassField.getText();
-        String description = updateDescriptionField.getText();
+        else{
 
-        JdbcDao jdbc = new JdbcDao();
-        jdbc.UpdateRecord(threadname,threadyear,threadpass,description);
+            String threadname = threadNameField.getText();
+            String threadyear = threadYearField.getText();
+            String threadpass = threadPassField.getText();
+            String description = updateDescriptionField.getText();
+
+            String query = "UPDATE thread SET threadpass = ?, description = ? WHERE threadname = ? and threadyear = ?";
+            String thread_query = "select * from thread where thread_id = ? ";
+
+            JdbcDao jdbc = new JdbcDao();
+            ArrayList<String> list = jdbc.thread_data(threadname+"-"+threadyear,thread_query);
+
+            if(threadpass.equals(""))
+                threadpass=list.get(0);
+            if(description.equals(""))
+                description=list.get(1);
+
+
+            if(JdbcDao.check_data(threadname+"-"+threadyear,thread_query)){
+
+                jdbc.UpdateRecord(threadname,threadyear,threadpass,description,query);
+
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("warning");
+                alert.setContentText("This Thread_id doesn't exist.");
+                alert.show();
+            }
+
+
+
+        }
 
     }
 
