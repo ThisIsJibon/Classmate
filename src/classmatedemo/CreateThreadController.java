@@ -53,9 +53,11 @@ public class CreateThreadController implements Initializable {
         String threadyear = threadYearField.getText();
         String description = threadDescField.getText();
         String thread_id = threadNameField.getText()+"-"+threadYearField.getText();
+
+        String query = "INSERT INTO  thread (threadname,threadpass,threadyear,description,thread_id) VALUES (?, ?, ?, ?, ?)";
         
         JdbcDao jdbc = new JdbcDao();
-        jdbc.insertRecord(threadname,threadpass,threadyear,description,thread_id);
+        jdbc.insertRecord(threadname,threadpass,threadyear,description,thread_id,query);
 
 
     }

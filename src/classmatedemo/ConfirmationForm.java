@@ -85,13 +85,16 @@ public class ConfirmationForm extends Stage {
         submitButton.setOnAction(e -> {
             try {
 
+                String query = "INSERT INTO  registration(name,username,email,reg,pass,repeatPass) VALUES (?, ?, ?, ?, ?, ?)";
+
+
                 if(codeField.getText().isEmpty()) {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your code");
                     return;
                 }
                 if(codeField.getText().equals(code)){
                     JdbcDao jdbc = new JdbcDao();
-                    jdbc.insertRecord(name,username,email,reg,pass,repeatPass);
+                    jdbc.insertRecord(name,username,email,reg,pass,repeatPass,query);
                     showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome to our site");
                     return;
                 }
