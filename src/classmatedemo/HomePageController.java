@@ -45,6 +45,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import static java.awt.Color.*;
+import javafx.scene.control.TableColumn;
 
 
 
@@ -109,8 +110,6 @@ public class HomePageController implements Initializable {
     private VBox importantPaneVBox;
     @FXML
     private VBox deadlinePaneVBox;
-    @FXML
-    private VBox searchboxPaneVBox;
     private LineChart<Number, Number> lineChart;
     private HBox accountPaneVBoxHBox;
     public Vector<String> threadList;
@@ -217,6 +216,48 @@ public class HomePageController implements Initializable {
     public String reg;
     public String name;
     public String password;
+    @FXML
+    private JFXComboBox<?> queryTypeComboBox;
+    @FXML
+    private JFXTextField queryValueField;
+    @FXML
+    private JFXCheckBox searchboxCricketCheck;
+    @FXML
+    private JFXCheckBox searchboxFootballCheck;
+    @FXML
+    private JFXCheckBox searchboxHandballCheck;
+    @FXML
+    private JFXCheckBox searchboxVolleyballCheck;
+    @FXML
+    private JFXCheckBox searchboxBasketballCheck;
+    @FXML
+    private JFXCheckBox searchboxActingCheck;
+    @FXML
+    private JFXCheckBox searchboxDebateCheck;
+    @FXML
+    private JFXCheckBox searchboxDanceCheck;
+    @FXML
+    private JFXCheckBox searchboxMusicCheck;
+    @FXML
+    private JFXCheckBox searchboxPhotographyCheck;
+    @FXML
+    private JFXCheckBox searchboxBloodCheck;
+    @FXML
+    private JFXButton searchInSearchboxButton;
+    @FXML
+    private TableColumn<?, ?> slColumn;
+    @FXML
+    private TableColumn<?, ?> nameColumn;
+    @FXML
+    private TableColumn<?, ?> registrationColumn;
+    @FXML
+    private TableColumn<?, ?> emailColumn;
+    @FXML
+    private TableColumn<?, ?> hometownColumn;
+    @FXML
+    private TableColumn<?, ?> bloodgpColumn;
+    @FXML
+    private TableColumn<?, ?> cgpaColumn;
 
 
     @Override
@@ -726,6 +767,10 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void accountCancelButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void searchInSearchboxButton(ActionEvent event) {
     }
 }
 
