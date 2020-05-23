@@ -275,24 +275,7 @@ public class HomePageController implements Initializable {
 
     }
 
-    private void loadGraphData() {
-        NumberAxis xAxis = new NumberAxis(1, 8, 1);
-        NumberAxis yAxis = new NumberAxis(2, 4, 0.25);
-        xAxis.setLabel("Term");
-        yAxis.setLabel("CGPA");
-        lineChart = new LineChart(xAxis, yAxis); //lineChart.setTitle("");
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("cgpa over terms");
-        series1.getData().add(new XYChart.Data<>(1, 3.5));
-        series1.getData().add(new XYChart.Data<>(2, 3.4));
-        series1.getData().add(new XYChart.Data<>(3, 3.7));
-        series1.getData().add(new XYChart.Data<>(4, 3.85));
-        series1.getData().add(new XYChart.Data<>(5, 3.9));
-        series1.getData().add(new XYChart.Data<>(6, 3.5));
-        lineChart.getData().add(series1);
-        lineChart.setMaxSize(300, 300);
-        accountPaneVBoxHBox.getChildren().add(lineChart);
-    }
+    
 
     @FXML
     private void homeButtonAction(ActionEvent event) {
