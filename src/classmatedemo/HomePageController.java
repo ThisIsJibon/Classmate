@@ -245,19 +245,19 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXButton searchInSearchboxButton;
     @FXML
-    private TableColumn<?, ?> slColumn;
+    private TableColumn<String, String> slColumn;
     @FXML
-    private TableColumn<?, ?> nameColumn;
+    private TableColumn<String, String> nameColumn;
     @FXML
-    private TableColumn<?, ?> registrationColumn;
+    private TableColumn<String, String> registrationColumn;
     @FXML
-    private TableColumn<?, ?> emailColumn;
+    private TableColumn<String, String> emailColumn;
     @FXML
-    private TableColumn<?, ?> hometownColumn;
+    private TableColumn<String, String> hometownColumn;
     @FXML
-    private TableColumn<?, ?> bloodgpColumn;
+    private TableColumn<String, String> bloodgpColumn;
     @FXML
-    private TableColumn<?, ?> cgpaColumn;
+    private TableColumn<String, String> cgpaColumn;
 
 
     @Override
@@ -761,7 +761,59 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void searchInSearchboxButton(ActionEvent event) {
+    private void searchInSearchboxButton(ActionEvent event) throws IOException {
+
+        StringBuffer query = new StringBuffer("select * from registration where ");
+
+
+        try {
+            if (!queryTypeComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
+                query.append(queryTypeComboBox.getSelectionModel().getSelectedItem() + "  =  \"" + queryValueField.getText() + "\"  and");
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println("NullPointerException occurred");
+        }
+
+        if(searchboxCricketCheck.isSelected()){
+            query.append(" cricket = \"1\" and");
+        }
+        if(searchboxFootballCheck.isSelected()){
+            query.append(" football = \"1\" and");
+        }
+        if(searchboxHandballCheck.isSelected()){
+            query.append(" handball = \"1\" and");
+        }
+        if(searchboxVolleyballCheck.isSelected()){
+            query.append(" volleyball = \"1\" and");
+        }
+        if(searchboxBasketballCheck.isSelected()){
+            query.append(" basketball = \"1\" and");
+        }
+        if(searchboxActingCheck.isSelected()){
+            query.append(" acting = \"1\" and");
+        }
+        if(searchboxDebateCheck.isSelected()){
+            query.append(" debate = \"1\" and");
+        }
+        if(searchboxDanceCheck.isSelected()){
+            query.append(" dance = \"1\" and");
+        }
+        if(searchboxMusicCheck.isSelected()){
+            query.append(" music = \"1\" and");
+        }
+        if(searchboxPhotographyCheck.isSelected()){
+            query.append(" photography = \"1\" and");
+        }
+        if(searchboxBloodCheck.isSelected()){
+            query.append(" blood_donate_yes = \"1\"   ");
+        }
+
+        int a = query.length();
+
+        query.delete(a-3,a);
+
+        System.out.println(query);
 
 
 
