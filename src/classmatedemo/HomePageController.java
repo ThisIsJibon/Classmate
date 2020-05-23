@@ -217,7 +217,7 @@ public class HomePageController implements Initializable {
     public String name;
     public String password;
     @FXML
-    private JFXComboBox<?> queryTypeComboBox;
+    private JFXComboBox<String> queryTypeComboBox;
     @FXML
     private JFXTextField queryValueField;
     @FXML
@@ -275,7 +275,7 @@ public class HomePageController implements Initializable {
 
     }
 
-    
+
 
     @FXML
     private void homeButtonAction(ActionEvent event) {
@@ -373,6 +373,14 @@ public class HomePageController implements Initializable {
     @FXML
     private void searchboxButtonAction(ActionEvent event) {
         searchboxPane.toFront();
+        queryTypeComboBox.getItems().clear();
+        queryTypeComboBox.getItems().addAll(
+                 "name",
+                          "reg",
+                          "email",
+                          "hometown",
+                          "bloodgroup"
+        );
     }
 
     @FXML
@@ -754,6 +762,9 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void searchInSearchboxButton(ActionEvent event) {
+
+
+
     }
 }
 

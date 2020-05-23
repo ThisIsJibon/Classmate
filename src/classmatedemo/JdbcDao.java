@@ -87,6 +87,7 @@ public class JdbcDao {
     }
 
 
+
     public void update_registration(String name,String username,String email,String pass,String repeatpass,String hometown,String cgpa,String semester,String bloodgroup,String cricket,String football,String handball,String volleyball,String basketball,String acting, String debate,String
 
                                     dance,String music,String photography,String teacher,String student,String blood_donate_yes,String blood_donate_no,String reg,String pas,String query) throws SQLException {
