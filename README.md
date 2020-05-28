@@ -1,9 +1,9 @@
 # Classmate
 <b>Project Title </b> : Classmate. \
 <b>Project Link </b>: https://github.com/ThisIsJibon/Classmate \
-<b>Progress </b>: 50% \
-<b>File </b>last updated on : 17-05-2020. \
-<b>Github </b>last updated on : 17-05-2020. \
+<b>Progress </b>: 70% \
+<b>File </b>last updated on : 28-05-2020. \
+<b>Github </b>last updated on : 28-05-2020. \
  \
 <b>Description </b> : \
 Class management desktop app based on database and we might need to use mysql/firebase as a backend. \
