@@ -248,7 +248,7 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXButton searchInSearchboxButton;
     @FXML
-    private TableColumn<User, String> slColumn;
+    private TableColumn<User, Integer> slColumn;
     @FXML
     private TableColumn<User, String> nameColumn;
     @FXML
@@ -820,17 +820,28 @@ public class HomePageController implements Initializable {
 
         System.out.println(query);
 
+
+        slColumn.setCellValueFactory(new PropertyValueFactory<User,Integer>("sl"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
         registrationColumn.setCellValueFactory(new PropertyValueFactory<User,String>("registration"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<User,String>("email"));
         hometownColumn.setCellValueFactory(new PropertyValueFactory<User,String>("hometown"));
         bloodgpColumn.setCellValueFactory(new PropertyValueFactory<User,String>("bloodGroup"));
         cgpaColumn.setCellValueFactory(new PropertyValueFactory<User,String>("cgpa"));
+
+        JdbcDao jdbcDao = new JdbcDao();
+        ArrayList<ArrayList<String>>list = jdbcDao.search_info(query.toString());
         
         
         //searchTable.setItems(oblist);
-        User user=User.createUser("mahin","mahinur@gmail.com","54","Noagaon","4.0","3rd","o+","mahin54","asdasd");
-        searchTable.getItems().add(user);
+        // User user=User.createUser("mahin","mahinur@gmail.com","54","Noagaon","4.0","3rd","o+","mahin54","asdasd");
+
+        for(int i=0;i<list.size();i++){
+            User user = User.createUser(i+1,list.get(i).get(0),list.get(i).get(1),list.get(i).get(2),list.get(i).get(3),list.get(i).get(4),
+                    list.get(i).get(5),list.get(i).get(6),list.get(i).get(7),list.get(i).get(8));
+            searchTable.getItems().add(user);
+        }
+
 
     }
 }

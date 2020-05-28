@@ -594,6 +594,64 @@ public class JdbcDao {
     }
 
 
+    public ArrayList<ArrayList<String>> search_info (String query){
+        try{
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+            ArrayList<String> list1 = new ArrayList<>();
+
+            try (Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+                 Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(query);
+                while(resultSet.next()){
+                    String name = resultSet.getString("name");
+                    String reg = resultSet.getString("reg");
+                    String email = resultSet.getString("email");
+                    String hometown = resultSet.getString("hometown");
+                    String bloodgroup = resultSet.getString("bloodgroup");
+                    String cgpa = resultSet.getString("cgpa");
+                    String semester = resultSet.getString("semester");
+                    String username = resultSet.getString("username");
+                    String password = resultSet.getString("pass");
+                    list1.add(name);
+                    list1.add(email);
+                    list1.add(reg);
+                    list1.add(hometown);
+                    list1.add(cgpa);
+                    list1.add(semester);
+                    list1.add(bloodgroup);
+                    list1.add(username);
+                    list1.add(password);
+
+                    list.add(list1);
+                }
+                resultSet.close();
+
+            } catch (Exception e) {
+                // print SQL exception information
+                e.printStackTrace();
+            }
+            return list;
+
+        }catch (Exception e) {
+            // print SQL exception information
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
 
 
     public ArrayList<String> feed (String thread_id,String query){

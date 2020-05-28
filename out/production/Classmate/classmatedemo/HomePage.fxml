@@ -666,7 +666,7 @@
                      <children>
                         <AnchorPane prefHeight="684.0" prefWidth="718.0">
                            <children>
-                              <TableView prefHeight="684.0" prefWidth="718.0">
+                              <TableView fx:id="searchTable" prefHeight="684.0" prefWidth="718.0">
                                 <columns>
                                     <TableColumn fx:id="slColumn" prefWidth="38.4000244140625" text="SL." />
                                   <TableColumn fx:id="nameColumn" prefWidth="164.79995727539062" text="Name" />

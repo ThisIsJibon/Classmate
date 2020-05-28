@@ -4,6 +4,12 @@ package classmatedemo;
 public class User {
     private String name, email, hometown,registration,bloodGroup,cgpa,semester,username,password;
 
+    private Integer sl;
+
+    public Integer getSl(){
+        return sl;
+    }
+
     public String getName() {
         return name;
     }
@@ -55,9 +61,11 @@ public class User {
         this.username=builder.username;
         this.password=builder.password;
         this.bloodGroup=builder.bloodGroup;
+        this.sl=builder.sl;
     }
-    public static User createUser(String name, String email,String registration,String hometown,String cgpa,String semester,String bloodGroup,String usernameString,String password){
+    public static User createUser(Integer sl,String name, String email,String registration,String hometown,String cgpa,String semester,String bloodGroup,String username,String password){
         User user=getBuilder()
+                .withSl(sl)
                 .withName(name)
                 .withBloodgroup(bloodGroup)
                 .withEmail(email)
@@ -65,7 +73,7 @@ public class User {
                 .withHometown(hometown)
                 .withCGPA(cgpa)
                 .withSemester(semester)
-                .withUsername(usernameString)
+                .withUsername(username)
                 .withPassword(password)
                 .build();
         return user;
@@ -77,7 +85,13 @@ public class User {
         
         private String name, email, hometown,registration,bloodGroup,cgpa,semester,username,password; 
         private boolean cricket,football,basketball,handball,volleyball,dance,music,debate,photography,acting,availableForBlood,isStudent; 
-        
+        private Integer sl;
+
+        Builder withSl(Integer sl){
+            this.sl=sl;
+            return  this;
+        }
+
         Builder withName(String name){
             this.name=name;
             return this;
