@@ -3,17 +3,48 @@ package classmatedemo;
 
 public class User {
     private String name, email, hometown,registration,bloodGroup,cgpa,semester,username,password;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getHometown() {
+        return hometown;
+    }
+
+    public String getRegistration() {
+        return registration;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public String getCgpa() {
+        return cgpa;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
     
     private boolean cricket,football,basketball,handball,volleyball,dance,music,debate,photography,acting,availableForBlood,isStudent;
     // users other than students wouldn be assigned "-1" as reg
     // queries would be executed only for students
-    
-    public static void main(String[] args) {
-        User myUser;
-        myUser=User.getBuilder().withBloodgroup("o+").withCGPA("4.00").withName("mahin").withHometown("SYL").build();
-        System.out.println(myUser.name+"asdasd");
-    }
-    
+   
+ 
     private User(Builder builder){
         this.name=builder.name;
         this.email=builder.email;
@@ -25,7 +56,20 @@ public class User {
         this.password=builder.password;
         this.bloodGroup=builder.bloodGroup;
     }
-    
+    public static User createUser(String name, String email,String registration,String hometown,String cgpa,String semester,String bloodGroup,String usernameString,String password){
+        User user=getBuilder()
+                .withName(name)
+                .withBloodgroup(bloodGroup)
+                .withEmail(email)
+                .withReg(registration)
+                .withHometown(hometown)
+                .withCGPA(cgpa)
+                .withSemester(semester)
+                .withUsername(usernameString)
+                .withPassword(password)
+                .build();
+        return user;
+    }
     public static Builder getBuilder(){
         return new User.Builder();
     }

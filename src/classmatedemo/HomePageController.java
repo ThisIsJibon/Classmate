@@ -45,7 +45,10 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import static java.awt.Color.*;
+import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 
@@ -245,20 +248,22 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXButton searchInSearchboxButton;
     @FXML
-    private TableColumn<String, String> slColumn;
+    private TableColumn<User, String> slColumn;
     @FXML
-    private TableColumn<String, String> nameColumn;
+    private TableColumn<User, String> nameColumn;
     @FXML
-    private TableColumn<String, String> registrationColumn;
+    private TableColumn<User, String> registrationColumn;
     @FXML
-    private TableColumn<String, String> emailColumn;
+    private TableColumn<User, String> emailColumn;
     @FXML
-    private TableColumn<String, String> hometownColumn;
+    private TableColumn<User, String> hometownColumn;
     @FXML
-    private TableColumn<String, String> bloodgpColumn;
+    private TableColumn<User, String> bloodgpColumn;
     @FXML
-    private TableColumn<String, String> cgpaColumn;
-
+    private TableColumn<User, String> cgpaColumn;
+    @FXML
+    private TableView<User> searchTable;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -815,7 +820,17 @@ public class HomePageController implements Initializable {
 
         System.out.println(query);
 
-
+        nameColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
+        registrationColumn.setCellValueFactory(new PropertyValueFactory<User,String>("registration"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<User,String>("email"));
+        hometownColumn.setCellValueFactory(new PropertyValueFactory<User,String>("hometown"));
+        bloodgpColumn.setCellValueFactory(new PropertyValueFactory<User,String>("bloodGroup"));
+        cgpaColumn.setCellValueFactory(new PropertyValueFactory<User,String>("cgpa"));
+        
+        
+        //searchTable.setItems(oblist);
+        User user=User.createUser("mahin","mahinur@gmail.com","54","Noagaon","4.0","3rd","o+","mahin54","asdasd");
+        searchTable.getItems().add(user);
 
     }
 }
