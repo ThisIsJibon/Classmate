@@ -605,7 +605,7 @@ public class JdbcDao {
             }
 
             ArrayList<ArrayList<String>> list = new ArrayList<>();
-            ArrayList<String> list1 = new ArrayList<>();
+            
 
             try (Connection connection = DriverManager
                     .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -613,6 +613,7 @@ public class JdbcDao {
                  Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(query);
                 while(resultSet.next()){
+                    ArrayList<String> list1 = new ArrayList<>();
                     String name = resultSet.getString("name");
                     String reg = resultSet.getString("reg");
                     String email = resultSet.getString("email");

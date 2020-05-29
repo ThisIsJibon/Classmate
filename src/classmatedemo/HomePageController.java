@@ -380,7 +380,7 @@ public class HomePageController implements Initializable {
         searchboxPane.toFront();
         queryTypeComboBox.getItems().clear();
         queryTypeComboBox.getItems().addAll(
-                 "name",
+                          "name",
                           "reg",
                           "email",
                           "hometown",
@@ -817,7 +817,9 @@ public class HomePageController implements Initializable {
         int a = query.length();
 
         query.delete(a-3,a);
-
+        
+        query.append("where student=\"1\"");
+        
         System.out.println(query);
 
 
@@ -840,6 +842,7 @@ public class HomePageController implements Initializable {
             User user = User.createUser(i+1,list.get(i).get(0),list.get(i).get(1),list.get(i).get(2),list.get(i).get(3),list.get(i).get(4),
                     list.get(i).get(5),list.get(i).get(6),list.get(i).get(7),list.get(i).get(8));
             searchTable.getItems().add(user);
+            System.out.println(list.get(i).get(1));
         }
 
 
