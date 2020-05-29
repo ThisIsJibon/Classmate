@@ -767,10 +767,10 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void searchInSearchboxButton(ActionEvent event) throws IOException {
-
+        
+        searchTable.getItems().clear();
         StringBuffer query = new StringBuffer("select * from registration where ");
-
-
+        
         try {
             if (!queryTypeComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
                 query.append(queryTypeComboBox.getSelectionModel().getSelectedItem() + "  =  \"" + queryValueField.getText() + "\"  and");
