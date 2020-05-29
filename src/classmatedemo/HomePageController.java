@@ -818,7 +818,7 @@ public class HomePageController implements Initializable {
 
         query.delete(a-3,a);
         
-        query.append("where student=\"1\"");
+        //query.append("where student=\"1\"");
         
         System.out.println(query);
 
