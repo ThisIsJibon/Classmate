@@ -8,6 +8,11 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.application.Application;
+import javafx.application.HostServices;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +25,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.prefs.Preferences;
+
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,9 +52,28 @@ import javafx.stage.Stage;
 
 import static java.awt.Color.*;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import javafx.application.Application;
+import javafx.application.HostServices;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 
@@ -208,6 +233,9 @@ public class HomePageController implements Initializable {
     private JFXCheckBox bloodYesCheck;
     @FXML
     private JFXCheckBox bloodNoCheck;
+    public boolean isFeedClicked = true;
+    @FXML
+    final ListView htmListView = new ListView();
 
 
     /**
@@ -263,6 +291,8 @@ public class HomePageController implements Initializable {
     private TableColumn<User, String> cgpaColumn;
     @FXML
     private TableView<User> searchTable;
+    @FXML
+    private HBox threadFeedAnchorPaneHbox;
     
 
     @Override
@@ -529,6 +559,13 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void postInThreadButtonAction(ActionEvent event) throws SQLException {
+        
+        if(isFeedClicked==true){
+            // feed clicked
+        }
+        else{
+            // resources clicked
+        }
 
 
         String info_query = "select * from registration where email = ? ";
@@ -588,7 +625,12 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void FeedButtonAction(ActionEvent actionEvent) {
-
+        
+        threadFeedAnchorPaneVbox.getChildren().clear();
+        threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
+        threadFeedAnchorPaneVbox.getChildren().add(threadListView);
+        isFeedClicked=true;
+        
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from news_feed where thread_id = ? order by date desc ";
         threadListView.getItems().clear();
@@ -602,8 +644,14 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void ResourcesButtonAction(ActionEvent actionEvent) {
+        
+        threadFeedAnchorPaneVbox.getChildren().clear();
+        threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
+        threadFeedAnchorPaneVbox.getChildren().add(htmListView);
+        isFeedClicked=false;
+             
     }
-
+   
     @FXML
     private void MembersButtonAction(ActionEvent actionEvent) {
 
