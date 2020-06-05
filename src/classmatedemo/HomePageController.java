@@ -645,6 +645,7 @@ public class HomePageController implements Initializable {
     @FXML
     private void ResourcesButtonAction(ActionEvent actionEvent) {
         
+        htmListView.setPrefHeight(553);
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
         threadFeedAnchorPaneVbox.getChildren().add(htmListView);
