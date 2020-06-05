@@ -648,6 +648,11 @@ public class HomePageController implements Initializable {
         htmListView.setPrefHeight(553);
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
+        Hyperlink link = new Hyperlink();
+        String post = postInThreadTextfield.getText();
+        link.setText(post);
+        htmListView.getItems().clear();
+        htmListView.getItems().add(link);
         threadFeedAnchorPaneVbox.getChildren().add(htmListView);
         isFeedClicked=false;
              
