@@ -25,7 +25,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.prefs.Preferences;
-
+import java.awt.Desktop;
+import java.net.URI;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +52,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import static java.awt.Color.*;
+import java.net.URISyntaxException;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.control.Hyperlink;
@@ -61,6 +63,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
@@ -562,29 +566,50 @@ public class HomePageController implements Initializable {
         
         if(isFeedClicked==true){
             // feed clicked
+            
+            String info_query = "select * from registration where email = ? ";
+            JdbcDao jdbc = new JdbcDao();
+            ArrayList<String> list = jdbc.get_all_info(email, info_query);
+
+            name = list.get(0);
+
+
+            DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+            Date dateobj = new Date();
+            System.out.println(df.format(dateobj));
+
+            //HTMLEditor htmlEditor = new HTMLEditor();
+            // htmlEditor.setHtmlText("<i>"+name+"</i>");
+
+            String feed = postInThreadTextfield.getText().trim();
+            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
+            jdbc.insertRecord_feed(name.toUpperCase(), reg, selected, feed, df.format(dateobj), query);
+
+            
         }
         else{
-            // resources clicked
+            // resources
+            String info_query = "select * from registration where email = ? ";
+            JdbcDao jdbc = new JdbcDao();
+            ArrayList<String> list = jdbc.get_all_info(email, info_query);
+
+            name = list.get(0);
+
+
+            DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+            Date dateobj = new Date();
+            System.out.println(df.format(dateobj));
+
+            //HTMLEditor htmlEditor = new HTMLEditor();
+            // htmlEditor.setHtmlText("<i>"+name+"</i>");
+
+            String feed = postInThreadTextfield.getText().trim();
+            String query = "INSERT INTO resource (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
+            jdbc.insertRecord_feed(name.toUpperCase(), reg, selected, feed, df.format(dateobj), query);
         }
 
 
-        String info_query = "select * from registration where email = ? ";
-        JdbcDao jdbc = new JdbcDao();
-        ArrayList<String> list = jdbc.get_all_info(email, info_query);
-
-        name = list.get(0);
-
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        Date dateobj = new Date();
-        System.out.println(df.format(dateobj));
-
-        //HTMLEditor htmlEditor = new HTMLEditor();
-        // htmlEditor.setHtmlText("<i>"+name+"</i>");
-
-        String feed = postInThreadTextfield.getText();
-        String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
-        jdbc.insertRecord_feed(name.toUpperCase(), reg, selected, feed, df.format(dateobj), query);
+   
 
 
     }
@@ -634,8 +659,9 @@ public class HomePageController implements Initializable {
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from news_feed where thread_id = ? order by date desc ";
         threadListView.getItems().clear();
-        ArrayList<String> list = jdbc.feed(selected, query);
-        for (String str : list) {
+        ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
+        for (int i=0;i<list.size();i++) {
+            String str = list.get(i).get(0)+"\n"+list.get(i).get(1)+"\n"+list.get(i).get(2)+"\n";
             System.out.println(str);
             threadListView.getItems().add(str);
         }
@@ -648,13 +674,45 @@ public class HomePageController implements Initializable {
         htmListView.setPrefHeight(553);
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
-        Hyperlink link = new Hyperlink();
+       // Hyperlink link = new Hyperlink();
         String post = postInThreadTextfield.getText();
-        link.setText(post);
+       // link.setText(post);
         htmListView.getItems().clear();
-        htmListView.getItems().add(link);
+       // htmListView.getItems().add(link);
         threadFeedAnchorPaneVbox.getChildren().add(htmListView);
         isFeedClicked=false;
+        
+        
+        List<Hyperlink> links = new ArrayList<>();
+
+        JdbcDao jdbc = new JdbcDao();
+        String query = "select * from resource where thread_id = ? order by date desc ";
+       
+        ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
+        for (int i=0;i<list.size();i++) {
+            System.out.println(list.get(i).get(2));
+            Hyperlink link = new Hyperlink(list.get(i).get(2).toString());
+            links.add(link);
+            htmListView.getItems().add(link);
+        }
+        for(Hyperlink link : links){
+            String url=link.getText();
+            link.setOnAction(new EventHandler<ActionEvent>() {
+                @Override            
+                public void handle(ActionEvent e) {
+                     Desktop desktop = Desktop.getDesktop();
+                    try {
+                         try {
+                             desktop.browse(new URI(url));
+                         } catch (IOException ex) {
+                             Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                    } catch (URISyntaxException ex) {
+                        Logger.getLogger(HomePageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
              
     }
    

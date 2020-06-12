@@ -655,7 +655,7 @@ public class JdbcDao {
 
 
 
-    public ArrayList<String> feed (String thread_id,String query){
+    public ArrayList<ArrayList<String>> feed (String thread_id,String query){
         try{
 
             try {
@@ -665,7 +665,7 @@ public class JdbcDao {
                 e1.printStackTrace();
             }
 
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
 
             try (Connection connection = DriverManager
                     .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -674,10 +674,15 @@ public class JdbcDao {
                 preparedStatement.setString(1,thread_id);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while(resultSet.next()){
+                    ArrayList<String> list1 = new ArrayList<>();
                     String name = resultSet.getString("name");
                     String date = resultSet.getString("date");
                     String text = resultSet.getString("feed");
-                    list.add(name+"\n"+date+"\n"+text+"\n");
+                    //list.add(name+"\n"+date+"\n"+text+"\n");
+                    list1.add(name);
+                    list1.add(date);
+                    list1.add(text);
+                    list.add(list1);
                 }
                 resultSet.close();
 
@@ -695,7 +700,6 @@ public class JdbcDao {
         return null;
 
     }
-
 
 
 
