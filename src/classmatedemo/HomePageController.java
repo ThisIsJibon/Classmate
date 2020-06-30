@@ -180,11 +180,11 @@ public class HomePageController implements Initializable {
     @FXML
     private javafx.scene.control.ScrollPane feedScrollPane;
     @FXML
-    private JFXListView<String> threadListView;
+    private ListView<postType> threadListView;
     @FXML
-    private JFXListView<String> homeListView;
+    private ListView<postType> homeListView;
     @FXML
-    private JFXListView<String> timelineListView;
+    private ListView<postType> timelineListView;
     @FXML
     private JFXPasswordField accountPasswordField;
     @FXML
@@ -238,7 +238,6 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXCheckBox bloodNoCheck;
     public boolean isFeedClicked = true;
-    @FXML
     final ListView htmListView = new ListView();
 
 
@@ -297,7 +296,7 @@ public class HomePageController implements Initializable {
     private TableView<User> searchTable;
     @FXML
     private HBox threadFeedAnchorPaneHbox;
-    
+    private ObservableList<postType>studentObservableList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -312,16 +311,23 @@ public class HomePageController implements Initializable {
 
         System.out.println(reg);
 
+
     }
-
-
+/*
+    public HomePageController() {
+        studentObservableList = FXCollections.observableArrayList();
+        studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );
+    }*/
 
     @FXML
     private void homeButtonAction(ActionEvent event) {
         homePane.toFront();
         homeListView.getItems().clear();
 
-        String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
+        /*String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
         String query = "select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
@@ -341,7 +347,14 @@ public class HomePageController implements Initializable {
         for (String strr : list) {
             System.out.println(strr);
             homeListView.getItems().add(strr);
-        }
+        }*/
+        studentObservableList = FXCollections.observableArrayList();
+        studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );
+        homeListView.setItems(studentObservableList);
+        homeListView.setCellFactory(NodeTypeController -> new NodeTypeController());
     }
 
     @FXML
@@ -351,14 +364,20 @@ public class HomePageController implements Initializable {
         threadComboBox.getItems().clear();
         threadListView.getItems().clear();
 
-        String query = "select *from manage_thread where reg = ? order by thread_id asc";
+        /*String query = "select *from manage_thread where reg = ? order by thread_id asc";
 
         JdbcDao jdbc = new JdbcDao();
         ArrayList<String> list = jdbc.threadlist(reg, query);
         for (String str : list) {
             threadComboBox.getItems().add(str);
-        }
-
+        }*/
+        studentObservableList = FXCollections.observableArrayList();
+        studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );
+        threadListView.setItems(studentObservableList);
+        threadListView.setCellFactory(NodeTypeController -> new NodeTypeController());
 
     }
 
@@ -377,7 +396,7 @@ public class HomePageController implements Initializable {
         timelinePane.toFront();
         timelineListView.getItems().clear();
 
-        String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
+        /*String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
         String query = "select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
@@ -396,7 +415,14 @@ public class HomePageController implements Initializable {
         for (String strr : list) {
             System.out.println(strr);
             timelineListView.getItems().add(strr);
-        }
+        }*/
+        studentObservableList = FXCollections.observableArrayList();
+        studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );
+        timelineListView.setItems(studentObservableList);
+        timelineListView.setCellFactory(NodeTypeController -> new NodeTypeController());
     }
 
     @FXML
@@ -654,7 +680,7 @@ public class HomePageController implements Initializable {
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
         threadFeedAnchorPaneVbox.getChildren().add(threadListView);
-        isFeedClicked=true;
+        /*isFeedClicked=true;
         
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from news_feed where thread_id = ? order by date desc ";
@@ -664,7 +690,7 @@ public class HomePageController implements Initializable {
             String str = list.get(i).get(0)+"\n"+list.get(i).get(1)+"\n"+list.get(i).get(2)+"\n";
             System.out.println(str);
             threadListView.getItems().add(str);
-        }
+        }*/
 
     }
 
