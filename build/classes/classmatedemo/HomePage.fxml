@@ -3,11 +3,11 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -349,32 +349,9 @@
                         </HBox>
                     </children>
                 </Pane>
-                <Pane id="threadPane" fx:id="importantPane" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox fx:id="importantPaneVBox" prefHeight="685.0" prefWidth="918.0" />
-                    </children>
-                </Pane>
                 <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0" />
-                    </children>
-                </Pane>
-                <Pane id="threadPane" fx:id="timelinePane" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox fx:id="timelimnePaneVBox" prefHeight="685.0" prefWidth="918.0">
-                            <children>
-                                <JFXListView fx:id="timelineListView" prefHeight="684.0" prefWidth="918.0" />
-                            </children>
-                        </VBox>
-                    </children>
-                </Pane>
-                <Pane id="homePane" fx:id="homePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox prefHeight="686.0" prefWidth="918.0">
-                            <children>
-                                <JFXListView fx:id="homeListView" prefHeight="689.0" prefWidth="918.0" />
-                            </children>
-                        </VBox>
                     </children>
                 </Pane>
                 <Pane id="threadPane" fx:id="accountPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1 #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -697,7 +674,7 @@
                                                                 </VBox>
                                                             </children>
                                                         </HBox>
-                                                        <JFXListView fx:id="threadListView" prefHeight="553.0" prefWidth="702.0" />
+                                          <ListView fx:id="threadListView" prefHeight="549.0" prefWidth="702.0" />
                                                     </children>
                                                 </VBox>
                                             </children>
@@ -766,6 +743,32 @@
                                 </AnchorPane>
                             </children>
                         </HBox>
+                    </children>
+                </Pane>
+                <Pane id="homePane" fx:id="homePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox prefHeight="686.0" prefWidth="918.0">
+                     <children>
+                        <ListView fx:id="homeListView" prefHeight="685.0" prefWidth="918.0" />
+                     </children>
+                        </VBox>
+                    </children>
+                </Pane>
+                <Pane id="threadPane" fx:id="timelinePane" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox fx:id="timelimnePaneVBox" prefHeight="685.0" prefWidth="918.0">
+                     <children>
+                        <ListView fx:id="timelineListView" prefHeight="684.0" prefWidth="918.0" />
+                     </children>
+                        </VBox>
+                    </children>
+                </Pane>
+                <Pane id="threadPane" fx:id="importantPane" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox fx:id="importantPaneVBox" prefHeight="685.0" prefWidth="918.0">
+                     <children>
+                        <ListView fx:id="importantListview" prefHeight="683.0" prefWidth="918.0" />
+                     </children></VBox>
                     </children>
                 </Pane>
             </children>

@@ -349,11 +349,6 @@
                         </HBox>
                     </children>
                 </Pane>
-                <Pane id="threadPane" fx:id="importantPane" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox fx:id="importantPaneVBox" prefHeight="685.0" prefWidth="918.0" />
-                    </children>
-                </Pane>
                 <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0" />
@@ -766,6 +761,14 @@
                         <ListView fx:id="timelineListView" prefHeight="684.0" prefWidth="918.0" />
                      </children>
                         </VBox>
+                    </children>
+                </Pane>
+                <Pane id="threadPane" fx:id="importantPane" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox fx:id="importantPaneVBox" prefHeight="685.0" prefWidth="918.0">
+                     <children>
+                        <ListView fx:id="importantListview" prefHeight="683.0" prefWidth="918.0" />
+                     </children></VBox>
                     </children>
                 </Pane>
             </children>

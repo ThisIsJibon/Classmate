@@ -8,13 +8,10 @@ package classmatedemo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
@@ -23,20 +20,18 @@ import javafx.scene.text.Text;
  *
  * @author Asus
  */
-public class NodeTypeController extends ListCell<postType>{
+public class NodeTypeLargeController extends ListCell<postType> {
 
     @FXML
     private Text nameText;
     @FXML
     private Text dateText;
     @FXML
-    private Text postText;
-    @FXML
     private Text timeText;
     @FXML
-    private Button saveButton;
+    private Text postText;
     @FXML
-    private BorderPane gridPane;
+    private BorderPane gridPane; 
     private FXMLLoader mLLoader;
 
     /**
@@ -53,7 +48,7 @@ public class NodeTypeController extends ListCell<postType>{
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("NodeType.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("NodeTypeLarge.fxml"));
                 mLLoader.setController(this);
 
                 try {
@@ -73,11 +68,6 @@ public class NodeTypeController extends ListCell<postType>{
             setGraphic(gridPane);
         }
 
-    }
-
-    @FXML
-    private void saveButtonAction(ActionEvent event) {
-        System.out.println("clicksssssssssss");
     }
     
 }

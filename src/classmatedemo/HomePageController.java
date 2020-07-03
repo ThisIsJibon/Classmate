@@ -297,6 +297,8 @@ public class HomePageController implements Initializable {
     @FXML
     private HBox threadFeedAnchorPaneHbox;
     private ObservableList<postType>studentObservableList;
+    @FXML
+    private ListView<postType> importantListview;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -354,7 +356,7 @@ public class HomePageController implements Initializable {
                 new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
         );
         homeListView.setItems(studentObservableList);
-        homeListView.setCellFactory(NodeTypeController -> new NodeTypeController());
+        homeListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
     }
 
     @FXML
@@ -422,12 +424,21 @@ public class HomePageController implements Initializable {
                 new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
         );
         timelineListView.setItems(studentObservableList);
-        timelineListView.setCellFactory(NodeTypeController -> new NodeTypeController());
+        timelineListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
     }
 
     @FXML
     private void importantButtonAction(ActionEvent event) {
         importantPane.toFront();
+        importantListview.getItems().clear();
+        studentObservableList = FXCollections.observableArrayList();
+        studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );
+        importantListview.setItems(studentObservableList);
+        importantListview.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
+        
     }
 
     @FXML
