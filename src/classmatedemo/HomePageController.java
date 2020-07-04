@@ -4,9 +4,11 @@ package classmatedemo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -301,6 +303,18 @@ public class HomePageController implements Initializable {
     private ListView<postType> importantListview;
     @FXML
     private Pane postDeadlinePane;
+    @FXML
+    private JFXComboBox<?> threadForTaskCombobox;
+    @FXML
+    private JFXDatePicker taskDatePicker;
+    @FXML
+    private JFXTimePicker taskTimePicker;
+    @FXML
+    private JFXTextField taskNameField;
+    @FXML
+    private TextField taskDescriptionField;
+    @FXML
+    private JFXButton postTaskButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -997,6 +1011,10 @@ public class HomePageController implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    private void postTaskButtonAction(ActionEvent event) {
     }
 }
 
