@@ -6,7 +6,7 @@
 <b>Github </b>last updated on : 04-07-2020. \
  \
 <b>Description </b> : \
-Class management desktop app based on database. \
+Class management desktop app with extra functionality for various types of database queries. \
  \
  \
  <b>We used : </b> \
