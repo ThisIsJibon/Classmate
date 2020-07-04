@@ -299,6 +299,7 @@ public class HomePageController implements Initializable {
     @FXML
     private HBox threadFeedAnchorPaneHbox;
     private ObservableList<postType>studentObservableList;
+    private ObservableList<DeadlineType>deadlineObList;
     @FXML
     private ListView<postType> importantListview;
     @FXML
@@ -318,7 +319,7 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXButton setDeadlineButton;
     @FXML
-    private ListView<?> deadlineListview;
+    private ListView<DeadlineType> deadlineListview;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -464,6 +465,13 @@ public class HomePageController implements Initializable {
     @FXML
     private void deadlineButtonAction(ActionEvent event) {
         deadlinePane.toFront();
+        
+        deadlineObList = FXCollections.observableArrayList();
+        deadlineObList.addAll(
+                new DeadlineType("CSE150", "EXAM", "7:00 PM", "10-9-2020","be prepared")
+        );
+        deadlineListview.setItems(deadlineObList);
+        deadlineListview.setCellFactory(DeadlineNodeTypeController -> new DeadlineNodeTypeController());
     }
 
     @FXML

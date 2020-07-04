@@ -33,7 +33,44 @@ public class DeadlineNodeTypeController extends ListCell<DeadlineType> {
     private Text dateText;
     @FXML
     private Text descriptionText;
+    @FXML
+    private BorderPane gridPane;
+    private FXMLLoader mLLoader;
 
+    
+        @Override
+    protected void updateItem(DeadlineType deadline, boolean empty) {
+        super.updateItem(deadline, empty);
+
+        if(empty || deadline == null) {
+
+            setText(null);
+            setGraphic(null);
+
+        } else {
+            if (mLLoader == null) {
+                mLLoader = new FXMLLoader(getClass().getResource("DeadlineNodeType.fxml"));
+                mLLoader.setController(this);
+
+                try {
+                    mLLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            dateText.setText((deadline.getDateText()));
+            taskHeadlineText.setText(deadline.getTaskText());
+            threadText.setText(deadline.getThreadText());
+            timeText.setText(deadline.getTimeText());
+            descriptionText.setText(deadline.getDescriptionText());
+
+            setText(null);
+            setGraphic(gridPane);
+        }
+
+    }
     @FXML
     private void doneButtonAction(ActionEvent event) {
     }
