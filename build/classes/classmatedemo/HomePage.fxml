@@ -3,8 +3,10 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -347,11 +349,6 @@
                                 </AnchorPane>
                             </children>
                         </HBox>
-                    </children>
-                </Pane>
-                <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0" />
                     </children>
                 </Pane>
                 <Pane id="threadPane" fx:id="accountPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1 #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -771,6 +768,143 @@
                      </children></VBox>
                     </children>
                 </Pane>
+                <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0">
+                     <children>
+                        <HBox prefHeight="74.0" prefWidth="918.0">
+                           <children>
+                              <Label graphicTextGap="10.0" prefHeight="60.0" prefWidth="755.0" text="Upcoming Deadlines">
+                                 <graphic>
+                                    <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_timesheet_48px.png" />
+                                       </image></ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <JFXButton fx:id="setDeadlineButton" graphicTextGap="10.0" onAction="#setDeadlineButtonAction" prefHeight="60.0" prefWidth="148.0" text="Set a Deadline">
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_alarm_clock_60px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <ListView fx:id="deadlineListview" prefHeight="613.0" prefWidth="918.0">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children></VBox>
+                    </children>
+                </Pane>
+            <Pane fx:id="postDeadlinePane" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <BorderPane prefHeight="683.0" prefWidth="918.0">
+                     <top>
+                        <VBox prefHeight="682.0" prefWidth="918.0" spacing="30.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <VBox prefHeight="78.0" prefWidth="612.0" spacing="5.0">
+                                 <children>
+                                    <Label graphicTextGap="10.0" prefHeight="20.0" prefWidth="562.0" text="Select a thread">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/icons8_email_send_60px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Label>
+                                    <Label graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="562.0" text="Set date and time with proper details about the deadline">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/icons8_email_send_60px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Label>
+                                    <Label graphicTextGap="10.0" layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="562.0" text="Post the deadline">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@icons/icons8_email_send_60px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="300.0" top="50.0" />
+                                 </VBox.margin>
+                              </VBox>
+                              <JFXComboBox fx:id="threadForTaskCombobox" prefHeight="26.0" prefWidth="262.0" promptText="Select a thread">
+                                 <VBox.margin>
+                                    <Insets left="330.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <HBox prefHeight="34.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <JFXDatePicker fx:id="taskDatePicker" prefHeight="28.0" prefWidth="166.0" />
+                                    <JFXTimePicker fx:id="taskTimePicker" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="295.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="372.0" prefWidth="918.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <VBox prefHeight="273.0" prefWidth="398.0" spacing="35.0">
+                                       <children>
+                                          <JFXTextField fx:id="taskNameField" prefHeight="49.0" prefWidth="398.0" promptText="Task">
+                                             <VBox.margin>
+                                                <Insets left="50.0" right="50.0" />
+                                             </VBox.margin>
+                                          </JFXTextField>
+                                          <TextField fx:id="taskDescriptionField" prefHeight="160.0" prefWidth="630.0" promptText="                                           Describe the task!" />
+                                          <JFXButton fx:id="postTaskButton" prefHeight="49.0" prefWidth="140.0" text="Post Deadline !">
+                                             <VBox.margin>
+                                                <Insets left="150.0" />
+                                             </VBox.margin>
+                                             <graphic>
+                                                <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@icons/icons8_alarm_clock_60px.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="260.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </VBox>
+                     </top>
+                  </BorderPane>
+               </children>
+            </Pane>
             </children>
         </AnchorPane>
     </children>

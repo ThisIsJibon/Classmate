@@ -351,11 +351,6 @@
                         </HBox>
                     </children>
                 </Pane>
-                <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0" />
-                    </children>
-                </Pane>
                 <Pane id="threadPane" fx:id="accountPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1 #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="686.0" prefWidth="918.0" stylesheets="@light-theme.css">
@@ -773,7 +768,49 @@
                      </children></VBox>
                     </children>
                 </Pane>
-            <Pane fx:id="postDeadlinePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Pane id="threadPane" fx:id="deadlinePane" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <VBox fx:id="deadlinePaneVBox" prefHeight="685.0" prefWidth="918.0">
+                     <children>
+                        <HBox prefHeight="74.0" prefWidth="918.0">
+                           <children>
+                              <Label graphicTextGap="10.0" prefHeight="60.0" prefWidth="755.0" text="Upcoming Deadlines">
+                                 <graphic>
+                                    <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_timesheet_48px.png" />
+                                       </image></ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <JFXButton fx:id="setDeadlineButton" graphicTextGap="10.0" onAction="#setDeadlineButtonAction" prefHeight="60.0" prefWidth="148.0" text="Set a Deadline">
+                                 <graphic>
+                                    <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_alarm_clock_60px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <ListView fx:id="deadlineListview" prefHeight="613.0" prefWidth="918.0">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </ListView>
+                     </children></VBox>
+                    </children>
+                </Pane>
+            <Pane fx:id="postDeadlinePane" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <BorderPane prefHeight="683.0" prefWidth="918.0">
                      <top>

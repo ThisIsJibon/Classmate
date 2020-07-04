@@ -315,6 +315,10 @@ public class HomePageController implements Initializable {
     private TextField taskDescriptionField;
     @FXML
     private JFXButton postTaskButton;
+    @FXML
+    private JFXButton setDeadlineButton;
+    @FXML
+    private ListView<?> deadlineListview;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1011,6 +1015,11 @@ public class HomePageController implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    private void setDeadlineButtonAction(ActionEvent event) {
+        postDeadlinePane.toFront();
     }
 
     @FXML
