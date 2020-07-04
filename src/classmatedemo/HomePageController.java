@@ -299,6 +299,8 @@ public class HomePageController implements Initializable {
     private ObservableList<postType>studentObservableList;
     @FXML
     private ListView<postType> importantListview;
+    @FXML
+    private Pane postDeadlinePane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
