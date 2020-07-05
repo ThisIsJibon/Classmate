@@ -180,6 +180,44 @@ public class JdbcDao {
     }
 
 
+    public void insertRecord_deadline (String thread,String date, String time, String task,String description,String reg,String done,String query) throws SQLException {
+
+        // load and register JDBC driver for MySQL
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        // Step 1: Establishing a Connection and
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, thread);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            preparedStatement.setString(4, task);
+            preparedStatement.setString(5, description);
+            preparedStatement.setString(6, reg);
+            preparedStatement.setString(7, done);
+
+
+
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+    }
+
+
 
     public void insertRecord(String thread_id, String reg,String query) throws IOException {
 

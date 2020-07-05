@@ -22,6 +22,10 @@ import java.nio.file.Files;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.prefs.Preferences;
@@ -305,7 +309,7 @@ public class HomePageController implements Initializable {
     @FXML
     private Pane postDeadlinePane;
     @FXML
-    private JFXComboBox<?> threadForTaskCombobox;
+    private JFXComboBox<String> threadForTaskCombobox;
     @FXML
     private JFXDatePicker taskDatePicker;
     @FXML
@@ -1119,10 +1123,41 @@ public class HomePageController implements Initializable {
     @FXML
     private void setDeadlineButtonAction(ActionEvent event) {
         postDeadlinePane.toFront();
+
+        threadForTaskCombobox.getItems().clear();
+
+        String query = "select *from manage_thread where reg = ? order by thread_id asc";
+
+        JdbcDao jdbc = new JdbcDao();
+        ArrayList<String> list = jdbc.threadlist(reg, query);
+        for (String str : list) {
+            threadForTaskCombobox.getItems().add(str);
+        }
+
     }
 
     @FXML
-    private void postTaskButtonAction(ActionEvent event) {
+    private void postTaskButtonAction(ActionEvent event) throws SQLException {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+
+        LocalDate date= taskDatePicker.getValue();
+        LocalTime time= taskTimePicker.getValue();
+
+
+        String thread = threadForTaskCombobox.getSelectionModel().getSelectedItem();
+        String task = taskNameField.getText();
+        String description = taskDescriptionField.getText();
+        String done ="0";
+
+
+
+
+        String query = "INSERT INTO deadline (thread,date,time,task,description,reg,done) VALUES (?, ?, ?, ?, ?,?,?) ";
+
+        JdbcDao jdbc = new JdbcDao();
+        jdbc.insertRecord_deadline(thread,date.toString(),time.toString(),task,description,reg,done,query);
+
     }
 }
 
