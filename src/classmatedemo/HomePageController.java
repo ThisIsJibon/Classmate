@@ -22,10 +22,8 @@ import java.nio.file.Files;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
+import java.util.List;
 import java.util.prefs.Preferences;
 import java.awt.Desktop;
 import java.net.URI;
@@ -54,6 +52,8 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
 import static java.awt.Color.*;
+import static java.util.Calendar.AM;
+
 import java.net.URISyntaxException;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -63,7 +63,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -350,7 +349,7 @@ public class HomePageController implements Initializable {
         homePane.toFront();
         homeListView.getItems().clear();
 
-        /*String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
         String query = "select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
@@ -365,17 +364,25 @@ public class HomePageController implements Initializable {
                 query += ("thread_id = \"" + items.get(i) + "\"  OR ");
         }
         System.out.println(query);
-        ArrayList<String> list = jdbc.home_feed(query);
+        ArrayList<ArrayList<String>> list = jdbc.home_feed(query);
 
-        for (String strr : list) {
-            System.out.println(strr);
-            homeListView.getItems().add(strr);
-        }*/
+
+
+
         studentObservableList = FXCollections.observableArrayList();
-        studentObservableList.addAll(
+
+        for(int i=0;i<list.size();i++){
+            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
+        }
+
+       /** studentObservableList.addAll(
                 new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
                 new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-        );
+
+        );*/
+
+
+
         homeListView.setItems(studentObservableList);
         homeListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
     }
@@ -387,20 +394,16 @@ public class HomePageController implements Initializable {
         threadComboBox.getItems().clear();
         threadListView.getItems().clear();
 
-        /*String query = "select *from manage_thread where reg = ? order by thread_id asc";
+        String query = "select *from manage_thread where reg = ? order by thread_id asc";
 
         JdbcDao jdbc = new JdbcDao();
         ArrayList<String> list = jdbc.threadlist(reg, query);
         for (String str : list) {
             threadComboBox.getItems().add(str);
-        }*/
-        studentObservableList = FXCollections.observableArrayList();
-        studentObservableList.addAll(
-                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
-                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-        );
-        threadListView.setItems(studentObservableList);
-        threadListView.setCellFactory(NodeTypeController -> new NodeTypeController());
+        }
+
+        postInThreadTextfield.setText("");
+
 
     }
 
@@ -419,7 +422,7 @@ public class HomePageController implements Initializable {
         timelinePane.toFront();
         timelineListView.getItems().clear();
 
-        /*String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
         String query = "select * from news_feed where ";
 
         JdbcDao jdbc = new JdbcDao();
@@ -433,17 +436,21 @@ public class HomePageController implements Initializable {
             else
                 query += ("thread_id = \"" + items.get(i) + "\"  OR ");
         }
+
         System.out.println(query);
-        ArrayList<String> list = jdbc.home_feed(query);
-        for (String strr : list) {
-            System.out.println(strr);
-            timelineListView.getItems().add(strr);
-        }*/
+        ArrayList<ArrayList<String>> list = jdbc.home_feed(query);
+
+
         studentObservableList = FXCollections.observableArrayList();
-        studentObservableList.addAll(
+
+        for(int i=0;i<list.size();i++){
+            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
+        }
+
+        /**studentObservableList.addAll(
                 new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
                 new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-        );
+        );*/
         timelineListView.setItems(studentObservableList);
         timelineListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
     }
@@ -639,17 +646,21 @@ public class HomePageController implements Initializable {
             name = list.get(0);
 
 
-            DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat df1 = new SimpleDateFormat("hh.mm aa");
             Date dateobj = new Date();
+
             System.out.println(df.format(dateobj));
+            System.out.println(df1.format(dateobj));
 
             //HTMLEditor htmlEditor = new HTMLEditor();
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
-            jdbc.insertRecord_feed(name.toUpperCase(), reg, selected, feed, df.format(dateobj), query);
+            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date,time) VALUES (?, ?, ?, ?, ?,?) ";
+            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj), df1.format(dateobj),query);
 
+            postInThreadTextfield.setText("");
             
         }
         else{
@@ -661,7 +672,8 @@ public class HomePageController implements Initializable {
             name = list.get(0);
 
 
-            DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat df1 = new SimpleDateFormat("hh.mm aa");
             Date dateobj = new Date();
             System.out.println(df.format(dateobj));
 
@@ -669,8 +681,11 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO resource (name,reg,thread_id,feed,date) VALUES (?, ?, ?, ?, ?) ";
-            jdbc.insertRecord_feed(name.toUpperCase(), reg, selected, feed, df.format(dateobj), query);
+            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,time) VALUES (?, ?, ?, ?, ?,?) ";
+            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj),df1.format(dateobj) ,query);
+
+            postInThreadTextfield.setText("");
+
         }
 
 
@@ -707,6 +722,9 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void AboutButtonAction(ActionEvent actionEvent) {
+
+        postInThreadTextfield.setText("");
+
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from thread where thread_id = ?";
         String ans = jdbc.get_about(selected, query);
@@ -715,27 +733,41 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void FeedButtonAction(ActionEvent actionEvent) {
+
+        postInThreadTextfield.setText("");
         
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
         threadFeedAnchorPaneVbox.getChildren().add(threadListView);
-        /*isFeedClicked=true;
+        isFeedClicked=true;
         
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from news_feed where thread_id = ? order by date desc ";
         threadListView.getItems().clear();
         ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
+
+
+        studentObservableList = FXCollections.observableArrayList();
+
         for (int i=0;i<list.size();i++) {
-            String str = list.get(i).get(0)+"\n"+list.get(i).get(1)+"\n"+list.get(i).get(2)+"\n";
-            System.out.println(str);
-            threadListView.getItems().add(str);
-        }*/
+            studentObservableList.add(new postType(list.get(i).get(2), list.get(i).get(1), list.get(i).get(0),list.get(i).get(3)));
+        }
+
+       /** studentObservableList.addAll(
+                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
+                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
+        );*/
+        threadListView.setItems(studentObservableList);
+        threadListView.setCellFactory(NodeTypeController -> new NodeTypeController());
+
 
     }
 
     @FXML
     private void ResourcesButtonAction(ActionEvent actionEvent) {
-        
+
+        postInThreadTextfield.setText("");
+
         htmListView.setPrefHeight(553);
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
@@ -784,6 +816,8 @@ public class HomePageController implements Initializable {
     @FXML
     private void MembersButtonAction(ActionEvent actionEvent) {
 
+        postInThreadTextfield.setText("");
+
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from manage_thread where thread_id = ? ";
         ArrayList<String> list = jdbc.memberlist(selected, query);
@@ -795,6 +829,8 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void ArchivesButtonAction(ActionEvent actionEvent) {
+
+        postInThreadTextfield.setText("");
 
 
     }

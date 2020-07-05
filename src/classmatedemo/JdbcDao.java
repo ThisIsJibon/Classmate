@@ -144,7 +144,7 @@ public class JdbcDao {
 
 
 
-    public void insertRecord_feed (String name,String reg, String thread_id, String feed,String date,String query) throws SQLException {
+    public void insertRecord_feed (String name,String reg, String thread_id, String feed,String date,String time,String query) throws SQLException {
 
         // load and register JDBC driver for MySQL
         try {
@@ -166,6 +166,7 @@ public class JdbcDao {
             preparedStatement.setString(3, thread_id);
             preparedStatement.setString(4, feed);
             preparedStatement.setString(5, date);
+            preparedStatement.setString(6, time);
 
 
 
@@ -678,10 +679,12 @@ public class JdbcDao {
                     String name = resultSet.getString("name");
                     String date = resultSet.getString("date");
                     String text = resultSet.getString("feed");
+                    String time = resultSet.getString("time");
                     //list.add(name+"\n"+date+"\n"+text+"\n");
                     list1.add(name);
                     list1.add(date);
                     list1.add(text);
+                    list1.add(time);
                     list.add(list1);
                 }
                 resultSet.close();
@@ -703,7 +706,7 @@ public class JdbcDao {
 
 
 
-    public ArrayList<String> home_feed (String query){
+    public ArrayList<ArrayList<String>> home_feed (String query){
         try{
 
             try {
@@ -713,7 +716,7 @@ public class JdbcDao {
                 e1.printStackTrace();
             }
 
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
 
             try (Connection connection = DriverManager
                     .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -721,11 +724,18 @@ public class JdbcDao {
                  Statement statement = connection.createStatement()) {
                 ResultSet resultSet = statement.executeQuery(query);
                 while(resultSet.next()){
+                    ArrayList<String> list1 = new ArrayList<>();
                     String name = resultSet.getString("name");
                     String thread__id= resultSet.getString("thread_id");
                     String date = resultSet.getString("date");
                     String text = resultSet.getString("feed");
-                    list.add(name+" > "+thread__id+"\n"+date+"\n"+text+"\n");
+                    String time = resultSet.getString("time");
+                    list1.add(name);
+                    list1.add(thread__id);
+                    list1.add(date);
+                    list1.add(text);
+                    list1.add(time);
+                    list.add(list1);
                 }
                 resultSet.close();
 
