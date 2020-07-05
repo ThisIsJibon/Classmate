@@ -40,6 +40,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -405,6 +406,13 @@ public class HomePageController implements Initializable {
         postInThreadTextfield.setText("");
 
 
+        AboutButton.setEffect(null);
+        FeedButton.setEffect(null);
+        ResourcesButton.setEffect(null);
+        MembersButton.setEffect(null);
+        ArchivesButton.setEffect(null);
+
+
     }
 
     @FXML
@@ -725,6 +733,15 @@ public class HomePageController implements Initializable {
 
         postInThreadTextfield.setText("");
 
+        DropShadow shadow = new DropShadow();
+
+        AboutButton.setEffect(shadow);
+        FeedButton.setEffect(null);
+        ResourcesButton.setEffect(null);
+        MembersButton.setEffect(null);
+        ArchivesButton.setEffect(null);
+
+
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from thread where thread_id = ?";
         String ans = jdbc.get_about(selected, query);
@@ -734,7 +751,18 @@ public class HomePageController implements Initializable {
     @FXML
     private void FeedButtonAction(ActionEvent actionEvent) {
 
+
         postInThreadTextfield.setText("");
+
+
+        DropShadow shadow = new DropShadow();
+
+        AboutButton.setEffect(null);
+        FeedButton.setEffect(shadow);
+        ResourcesButton.setEffect(null);
+        MembersButton.setEffect(null);
+        ArchivesButton.setEffect(null);
+
         
         threadFeedAnchorPaneVbox.getChildren().clear();
         threadFeedAnchorPaneVbox.getChildren().add(threadFeedAnchorPaneHbox);
@@ -767,6 +795,16 @@ public class HomePageController implements Initializable {
     private void ResourcesButtonAction(ActionEvent actionEvent) {
 
         postInThreadTextfield.setText("");
+
+
+        DropShadow shadow = new DropShadow();
+
+        AboutButton.setEffect(null);
+        FeedButton.setEffect(null);
+        ResourcesButton.setEffect(shadow);
+        MembersButton.setEffect(null);
+        ArchivesButton.setEffect(null);
+
 
         htmListView.setPrefHeight(553);
         threadFeedAnchorPaneVbox.getChildren().clear();
@@ -818,6 +856,16 @@ public class HomePageController implements Initializable {
 
         postInThreadTextfield.setText("");
 
+
+        DropShadow shadow = new DropShadow();
+
+        AboutButton.setEffect(null);
+        FeedButton.setEffect(null);
+        ResourcesButton.setEffect(null);
+        MembersButton.setEffect(shadow);
+        ArchivesButton.setEffect(null);
+
+
         JdbcDao jdbc = new JdbcDao();
         String query = "select * from manage_thread where thread_id = ? ";
         ArrayList<String> list = jdbc.memberlist(selected, query);
@@ -832,6 +880,13 @@ public class HomePageController implements Initializable {
 
         postInThreadTextfield.setText("");
 
+        DropShadow shadow = new DropShadow();
+
+        AboutButton.setEffect(null);
+        FeedButton.setEffect(null);
+        ResourcesButton.setEffect(null);
+        MembersButton.setEffect(null);
+        ArchivesButton.setEffect(shadow);
 
     }
 
