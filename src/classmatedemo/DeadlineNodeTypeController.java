@@ -73,6 +73,9 @@ public class DeadlineNodeTypeController extends ListCell<DeadlineType> {
     }
     @FXML
     private void doneButtonAction(ActionEvent event) {
+
+
+
     }
 
     

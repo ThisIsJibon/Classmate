@@ -17,7 +17,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class JdbcDao {
 
@@ -180,7 +183,7 @@ public class JdbcDao {
     }
 
 
-    public void insertRecord_deadline (String thread,String date, String time, String task,String description,String reg,String done,String query) throws SQLException {
+    public void insertRecord_deadline (String thread,String dat, String time, String task,String description,String reg,String done,String date,String query) throws SQLException {
 
         // load and register JDBC driver for MySQL
         try {
@@ -198,12 +201,13 @@ public class JdbcDao {
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, thread);
-            preparedStatement.setString(2, date);
+            preparedStatement.setString(2, dat);
             preparedStatement.setString(3, time);
             preparedStatement.setString(4, task);
             preparedStatement.setString(5, description);
             preparedStatement.setString(6, reg);
             preparedStatement.setString(7, done);
+            preparedStatement.setString(8, date);
 
 
 
@@ -791,6 +795,69 @@ public class JdbcDao {
         return null;
 
     }
+
+
+
+
+
+  public ArrayList<ArrayList<String>> deadline(String query){
+        try{
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+
+
+
+            try (Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+                 Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(query);
+                while(resultSet.next()){
+                    ArrayList<String> list1 = new ArrayList<>();
+                    String thread= resultSet.getString("thread");
+                    String task= resultSet.getString("task");
+                    String time= resultSet.getString("tim");
+                    String date = resultSet.getString("dat");
+                    String description = resultSet.getString("description");
+
+                    list1.add(thread);
+                    list1.add(task);
+                    list1.add(time);
+                    list1.add(date);
+                    list1.add(description);
+                    list.add(list1);
+
+
+                }
+                resultSet.close();
+
+            } catch (Exception e) {
+                // print SQL exception information
+                e.printStackTrace();
+            }
+            return list;
+
+        }catch (Exception e) {
+            // print SQL exception information
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
+
+
+
+
 
 
 

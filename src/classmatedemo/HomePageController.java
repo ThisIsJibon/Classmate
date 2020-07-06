@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,6 +60,7 @@ import javafx.stage.Stage;
 
 import static java.awt.Color.*;
 import static java.util.Calendar.AM;
+
 
 import java.net.URISyntaxException;
 import javafx.collections.FXCollections;
@@ -486,9 +489,42 @@ public class HomePageController implements Initializable {
         deadlinePane.toFront();
         
         deadlineObList = FXCollections.observableArrayList();
-        deadlineObList.addAll(
-                new DeadlineType("CSE150", "EXAM", "7:00 PM", "10-9-2020","be prepared")
-        );
+        /**deadlineObList.addAll(
+                new DeadlineType("CSE150", "EXAM", "2020-09-10", "7:10PM","be prepared")
+        );  */
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        Date dateobj = new Date();
+
+        String PresentDay = df.format(dateobj);
+        String ok = "0";
+
+        System.out.println(PresentDay);
+
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
+        String query = "select * from deadline  where date >= \""+PresentDay+"\" AND done = \""+ok+"\" AND ( ";
+
+        JdbcDao jdbc = new JdbcDao();
+
+        ArrayList<String> items = jdbc.threadlist(reg, query1);
+
+
+        for (int i = 0; i < items.size(); i++) {
+            if (i == items.size() - 1)
+                query += ("thread = \"" + items.get(i)+"\" ) order by  dat asc ");
+            else
+                query += ("thread = \"" + items.get(i) + "\"  OR ");
+        }
+
+        System.out.println(query);
+        ArrayList<ArrayList<String>> list = jdbc.deadline(query);
+
+
+        for(int i=0;i<list.size();i++){
+            deadlineObList.add(new DeadlineType(list.get(i).get(0), list.get(i).get(1),list.get(i).get(3), list.get(i).get(2),list.get(i).get(4)));
+        }
+
+
         deadlineListview.setItems(deadlineObList);
         deadlineListview.setCellFactory(DeadlineNodeTypeController -> new DeadlineNodeTypeController());
     }
@@ -1139,10 +1175,6 @@ public class HomePageController implements Initializable {
     @FXML
     private void postTaskButtonAction(ActionEvent event) throws SQLException {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-
-        LocalDate date= taskDatePicker.getValue();
-        LocalTime time= taskTimePicker.getValue();
 
 
         String thread = threadForTaskCombobox.getSelectionModel().getSelectedItem();
@@ -1151,13 +1183,24 @@ public class HomePageController implements Initializable {
         String done ="0";
 
 
+        LocalDate date = taskDatePicker.getValue();
+        LocalTime time = taskTimePicker.getValue();
+
+        System.out.println( date );
+        System.out.println( time );
 
 
-        String query = "INSERT INTO deadline (thread,date,time,task,description,reg,done) VALUES (?, ?, ?, ?, ?,?,?) ";
+
+
+        String query = "INSERT INTO deadline (thread,dat,tim,task,description,reg,done,date) VALUES (?, ?, ?, ?, ?,?,?,?) ";
 
         JdbcDao jdbc = new JdbcDao();
-        jdbc.insertRecord_deadline(thread,date.toString(),time.toString(),task,description,reg,done,query);
+        jdbc.insertRecord_deadline(thread,date.toString(),time.toString(),task,description,reg,done,date.toString()+" "+time.toString(),query);
+
+
+
 
     }
+
 }
 
