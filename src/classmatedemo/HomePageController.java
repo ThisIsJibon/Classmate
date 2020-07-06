@@ -493,40 +493,66 @@ public class HomePageController implements Initializable {
                 new DeadlineType("CSE150", "EXAM", "2020-09-10", "7:10PM","be prepared")
         );  */
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat df1 = new SimpleDateFormat("hh:mm aa");
+        DateFormat df2 = new SimpleDateFormat("hh:mm");
         Date dateobj = new Date();
 
         String PresentDay = df.format(dateobj);
-        String ok = "0";
 
-        System.out.println(PresentDay);
+        try {
 
-        String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
-        String query = "select * from deadline  where date >= \""+PresentDay+"\" AND done = \""+ok+"\" AND ( ";
-
-        JdbcDao jdbc = new JdbcDao();
-
-        ArrayList<String> items = jdbc.threadlist(reg, query1);
+            String PresentTime = df1.format(dateobj);
+            System.out.println(PresentTime);
+            Date dd = df1.parse(PresentTime);
+            System.out.println(df2.format(dd));
 
 
-        for (int i = 0; i < items.size(); i++) {
-            if (i == items.size() - 1)
-                query += ("thread = \"" + items.get(i)+"\" ) order by  dat asc ");
-            else
-                query += ("thread = \"" + items.get(i) + "\"  OR ");
+            String ok = "0";
+
+            String query1 = "select * from manage_thread where reg = ? order by thread_id asc";
+            String query = "select * from deadline  where date >= \""+PresentDay+" "+df2.format(dd)+"\" AND done = \""+ok+"\" AND ( ";
+
+            JdbcDao jdbc = new JdbcDao();
+
+            ArrayList<String> items = jdbc.threadlist(reg, query1);
+
+
+            for (int i = 0; i < items.size(); i++) {
+                if (i == items.size() - 1)
+                    query += ("thread = \"" + items.get(i)+"\" ) order by  dat asc ");
+                else
+                    query += ("thread = \"" + items.get(i) + "\"  OR ");
+            }
+
+            System.out.println(query);
+            ArrayList<ArrayList<String>> list = jdbc.deadline(query);
+
+
+            for(int i=0;i<list.size();i++){
+
+                try{
+                    Date date =  df2.parse(list.get(i).get(2));
+                    System.out.println(df1.format(date));
+                    deadlineObList.add(new DeadlineType(list.get(i).get(0), list.get(i).get(1),list.get(i).get(3), df1.format(date),list.get(i).get(4)));
+                }
+                catch (ParseException e){
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
         }
-
-        System.out.println(query);
-        ArrayList<ArrayList<String>> list = jdbc.deadline(query);
-
-
-        for(int i=0;i<list.size();i++){
-            deadlineObList.add(new DeadlineType(list.get(i).get(0), list.get(i).get(1),list.get(i).get(3), list.get(i).get(2),list.get(i).get(4)));
+        catch (ParseException e){
+            e.printStackTrace();
         }
-
 
         deadlineListview.setItems(deadlineObList);
         deadlineListview.setCellFactory(DeadlineNodeTypeController -> new DeadlineNodeTypeController());
+
+
     }
 
     @FXML
@@ -1188,9 +1214,6 @@ public class HomePageController implements Initializable {
 
         System.out.println( date );
         System.out.println( time );
-
-
-
 
         String query = "INSERT INTO deadline (thread,dat,tim,task,description,reg,done,date) VALUES (?, ?, ?, ?, ?,?,?,?) ";
 
