@@ -1047,6 +1047,7 @@
                   </BorderPane>
                </children>
             </Pane>
+            <Pane fx:id="threadMemberPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;" />
             </children>
         </AnchorPane>
     </children>

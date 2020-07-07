@@ -8,7 +8,7 @@
     <update check="always"/>
     <resources>
         <j2se version="9.0.4+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="ClassmateDemo.jar" size="194283" download="eager"/>
+        <jar href="ClassmateDemo.jar" size="194313" download="eager"/>
         <jar href="lib\activation.jar" size="55147" download="eager"/>
         <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager"/>
         <jar href="lib\fontawesomefx-commons-8.15.jar" size="20957" download="eager"/>

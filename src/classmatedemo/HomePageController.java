@@ -341,6 +341,8 @@ public class HomePageController implements Initializable {
     private Text aboutThreadPasswordText;
     @FXML
     private Text aboutThreadDescText;
+    @FXML
+    private Pane threadMemberPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
