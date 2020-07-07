@@ -347,9 +347,9 @@ public class HomePageController implements Initializable {
     @FXML
     private Text threadMembersNumberText;
     @FXML
-    private CheckListView<?> globalListView;
+    private CheckListView<String> globalListView;
     @FXML
-    private CheckListView<?> threadMembersListview;
+    private CheckListView<String> threadMembersListview;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -984,6 +984,11 @@ public class HomePageController implements Initializable {
         for (String str : list) {
             System.out.println(str);
         }
+        threadMemberPane.toFront();
+        String nameString="2018331001";
+        globalListView.getItems().add(nameString);
+        nameString="2018331002";
+        globalListView.getItems().add(nameString);
 
     }
 
