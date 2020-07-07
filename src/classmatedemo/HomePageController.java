@@ -87,6 +87,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckListView;
 
 
 
@@ -345,6 +346,8 @@ public class HomePageController implements Initializable {
     private Pane threadMemberPane;
     @FXML
     private Text threadMembersNumberText;
+    @FXML
+    private CheckListView<?> globalListView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

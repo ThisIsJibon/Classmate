@@ -23,6 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1143.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.HomePageController">
     <children>
@@ -1071,6 +1072,7 @@
                               <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User" />
                            </children>
                         </HBox>
+                        <CheckListView fx:id="threadMembersListview" prefHeight="49.0" prefWidth="914.0" />
                         <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="918.0" spacing="5.0">
                            <children>
                               <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -1086,6 +1088,7 @@
                               <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User" />
                            </children>
                         </HBox>
+                        <CheckListView fx:id="globalListView" prefHeight="53.0" prefWidth="914.0" />
                      </children>
                      <padding>
                         <Insets left="5.0" top="10.0" />
