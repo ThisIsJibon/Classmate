@@ -1047,7 +1047,52 @@
                   </BorderPane>
                </children>
             </Pane>
-            <Pane fx:id="threadMemberPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;" />
+            <Pane fx:id="threadMemberPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;">
+               <children>
+                  <VBox prefHeight="686.0" prefWidth="918.0" spacing="5.0">
+                     <children>
+                        <HBox prefHeight="33.0" prefWidth="918.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8_user_100px_1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thread Members :" wrappingWidth="168.40503692626953">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="threadMembersNumberText" layoutX="36.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="552.4049911499023">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="918.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8_user_100px_1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Global Users :" wrappingWidth="726.8049240112305">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
             </children>
         </AnchorPane>
     </children>

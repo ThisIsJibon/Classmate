@@ -343,6 +343,8 @@ public class HomePageController implements Initializable {
     private Text aboutThreadDescText;
     @FXML
     private Pane threadMemberPane;
+    @FXML
+    private Text threadMembersNumberText;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1262,6 +1264,14 @@ public class HomePageController implements Initializable {
 
 
 
+    }
+
+    @FXML
+    private void removeUserFromThreadAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void addUserFromThreadAction(ActionEvent event) {
     }
 
 
