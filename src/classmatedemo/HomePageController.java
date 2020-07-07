@@ -348,6 +348,8 @@ public class HomePageController implements Initializable {
     private Text threadMembersNumberText;
     @FXML
     private CheckListView<?> globalListView;
+    @FXML
+    private CheckListView<?> threadMembersListview;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
