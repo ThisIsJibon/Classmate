@@ -327,6 +327,20 @@ public class HomePageController implements Initializable {
     private JFXButton setDeadlineButton;
     @FXML
     private ListView<DeadlineType> deadlineListview;
+    @FXML
+    private Pane aboutThreadPane;
+    @FXML
+    private JFXButton aboutThreadBackButton;
+    @FXML
+    private Text aboutThreadNameText;
+    @FXML
+    private Text aboutThreadYearText;
+    @FXML
+    private Text aboutThreadMembersText;
+    @FXML
+    private Text aboutThreadPasswordText;
+    @FXML
+    private Text aboutThreadDescText;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -341,17 +355,34 @@ public class HomePageController implements Initializable {
 
         System.out.println(reg);
 
-
+        ini();
     }
-/*
-    public HomePageController() {
-        studentObservableList = FXCollections.observableArrayList();
-        studentObservableList.addAll(
-                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
-                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-        );
-    }*/
+    void ini(){
+        homePane.toFront();
+        homeListView.getItems().clear();
 
+        String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
+        String query = "select * from news_feed where ";
+        JdbcDao jdbc = new JdbcDao();
+        ArrayList<String> items = jdbc.threadlist(reg, query1);
+
+        for (int i = 0; i < items.size(); i++) {
+            if (i == items.size() - 1)
+                query += ("thread_id = \"" + items.get(i) + "\" order by  date desc");
+            else
+                query += ("thread_id = \"" + items.get(i) + "\"  OR ");
+        }
+        ArrayList<ArrayList<String>> list = jdbc.home_feed(query);
+
+        studentObservableList = FXCollections.observableArrayList();
+
+        for(int i=0;i<list.size();i++){
+            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
+        }
+
+        homeListView.setItems(studentObservableList);
+        homeListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
+    }
     @FXML
     private void homeButtonAction(ActionEvent event) {
         homePane.toFront();
@@ -812,6 +843,12 @@ public class HomePageController implements Initializable {
         String query = "select * from thread where thread_id = ?";
         String ans = jdbc.get_about(selected, query);
         System.out.println(ans);
+        aboutThreadPane.toFront();
+        aboutThreadNameText.setText("CSE150");
+        aboutThreadMembersText.setText("200");
+        aboutThreadPasswordText.setText("abc");
+        aboutThreadYearText.setText("2020");
+        aboutThreadDescText.setText("we will have fun");
     }
 
     @FXML
@@ -1224,6 +1261,7 @@ public class HomePageController implements Initializable {
 
 
     }
+
 
 }
 

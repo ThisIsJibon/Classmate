@@ -22,6 +22,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="1143.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.HomePageController">
     <children>
@@ -902,6 +903,134 @@
                            </BorderPane.margin>
                         </VBox>
                      </top>
+                  </BorderPane>
+               </children>
+            </Pane>
+            <Pane fx:id="aboutThreadPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;">
+               <children>
+                  <BorderPane prefHeight="683.0" prefWidth="918.0">
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="33.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_tag_window_100px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thread Title :" wrappingWidth="151.11365509033203">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="aboutThreadNameText" layoutX="161.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="254.91949081420898">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_calendar_1_100px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thread Year :" wrappingWidth="151.11365509033203">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="aboutThreadYearText" layoutX="161.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="197.31951522827148">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="44.0" prefHeight="33.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_male_user_100px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Members :" wrappingWidth="151.11365509033203">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="aboutThreadMembersText" layoutX="161.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="197.31951522827148">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="77.0" prefHeight="33.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_key_2_100px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" wrappingWidth="151.11365509033203">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="aboutThreadPasswordText" layoutX="161.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="428.519588470459">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="111.0" prefHeight="33.0" prefWidth="918.0" spacing="20.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_info_100px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deatails : " wrappingWidth="151.11365509033203">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="aboutThreadDescText" layoutX="161.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="623.7195091247559">
+                                       <font>
+                                          <Font name="Agency FB" size="25.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="30.0" top="30.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </center>
+                     <bottom>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="aboutThreadBackButton" onAction="#threadButtonAction" prefHeight="55.0" prefWidth="127.0" text="Back">
+                                 <graphic>
+                                    <ImageView fitHeight="39.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_go_back_128px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="400.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </children>
             </Pane>
