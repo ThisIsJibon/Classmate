@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTimePicker;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.awt.*;
@@ -260,6 +261,8 @@ public class HomePageController implements Initializable {
     public String reg;
     public String name;
     public String password;
+    public String thread_name;
+
     @FXML
     private JFXComboBox<String> queryTypeComboBox;
     @FXML
@@ -364,9 +367,9 @@ public class HomePageController implements Initializable {
 
         System.out.println(reg);
 
-        ini();
+        homePageInitialize();
     }
-    void ini(){
+    void homePageInitialize(){
         homePane.toFront();
         homeListView.getItems().clear();
 
@@ -394,45 +397,10 @@ public class HomePageController implements Initializable {
     }
     @FXML
     private void homeButtonAction(ActionEvent event) {
-        homePane.toFront();
-        homeListView.getItems().clear();
 
-        String query1 = "select * from manage_thread where reg = ? order by thread_id asc ";
-        String query = "select * from news_feed where ";
-
-        JdbcDao jdbc = new JdbcDao();
-
-        ArrayList<String> items = jdbc.threadlist(reg, query1);
+        homePageInitialize();
 
 
-        for (int i = 0; i < items.size(); i++) {
-            if (i == items.size() - 1)
-                query += ("thread_id = \"" + items.get(i) + "\" order by  date desc");
-            else
-                query += ("thread_id = \"" + items.get(i) + "\"  OR ");
-        }
-        System.out.println(query);
-        ArrayList<ArrayList<String>> list = jdbc.home_feed(query);
-
-
-
-
-        studentObservableList = FXCollections.observableArrayList();
-
-        for(int i=0;i<list.size();i++){
-            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
-        }
-
-       /** studentObservableList.addAll(
-                new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
-                new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-
-        );*/
-
-
-
-        homeListView.setItems(studentObservableList);
-        homeListView.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
     }
 
     @FXML
@@ -837,6 +805,7 @@ public class HomePageController implements Initializable {
     @FXML
     private void AboutButtonAction(ActionEvent actionEvent) {
 
+
         postInThreadTextfield.setText("");
 
         DropShadow shadow = new DropShadow();
@@ -847,17 +816,46 @@ public class HomePageController implements Initializable {
         MembersButton.setEffect(null);
         ArchivesButton.setEffect(null);
 
-
-        JdbcDao jdbc = new JdbcDao();
-        String query = "select * from thread where thread_id = ?";
-        String ans = jdbc.get_about(selected, query);
-        System.out.println(ans);
         aboutThreadPane.toFront();
-        aboutThreadNameText.setText("CSE150");
-        aboutThreadMembersText.setText("200");
-        aboutThreadPasswordText.setText("abc");
-        aboutThreadYearText.setText("2020");
-        aboutThreadDescText.setText("we will have fun");
+
+
+        aboutThreadNameText.setText("");
+        aboutThreadMembersText.setText("");
+        aboutThreadPasswordText.setText("");
+        aboutThreadYearText.setText("");
+        aboutThreadDescText.setText("");
+
+
+        try {
+
+            if(!threadComboBox.getSelectionModel().getSelectedItem().isEmpty()){
+
+
+                JdbcDao jdbc = new JdbcDao();
+                String query = "select * from thread where thread_id = ?";
+                ArrayList<String> list = jdbc.get_about(selected, query);
+
+
+                String query1 = "select * from manage_thread where thread_id = ? ";
+                ArrayList<String> list1 = jdbc.memberlist(selected, query1);
+
+
+
+                aboutThreadNameText.setText(list.get(0));
+                aboutThreadMembersText.setText(String.valueOf(list1.size()));
+                aboutThreadPasswordText.setText(list.get(2));
+                aboutThreadYearText.setText(list.get(1));
+                aboutThreadDescText.setText(list.get(3));
+
+
+            }
+
+        }
+        catch (NullPointerException e){
+            System.out.println("NullPointerException occured");
+        }
+
+
     }
 
     @FXML
@@ -979,12 +977,32 @@ public class HomePageController implements Initializable {
 
 
         JdbcDao jdbc = new JdbcDao();
-        String query = "select * from manage_thread where thread_id = ? ";
+        String query = "select * from manage_thread where thread_id = ? order by reg asc";
+        String query1 = "select * from registration order by reg asc";
         ArrayList<String> list = jdbc.memberlist(selected, query);
+
         for (String str : list) {
             System.out.println(str);
         }
+
+        ArrayList<String> list1 = jdbc.allUser(query1);
+
+
         threadMemberPane.toFront();
+        globalListView.getItems().clear();
+        threadMembersListview.getItems().clear();
+
+        threadMembersNumberText.setText(String.valueOf(list.size()));
+
+        for(String str : list1){
+            globalListView.getItems().add(str);
+        }
+
+        for(String str : list){
+            threadMembersListview.getItems().add(str);
+        }
+
+
         String nameString="2018331001";
         globalListView.getItems().add(nameString);
         nameString="2018331002";
@@ -1137,7 +1155,7 @@ public class HomePageController implements Initializable {
 
             if (name != list.get(0)) {
                 String update_query = "UPDATE news_feed SET name = ? where reg =? ";
-                jdb.update_name_news_feed(reg, name.toUpperCase(), update_query);
+                jdb.update_name_news_feed(reg, name, update_query);
             }
 
 
@@ -1277,11 +1295,94 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void removeUserFromThreadAction(ActionEvent event) {
+    private void removeUserFromThreadAction(ActionEvent event) throws IOException {
+
+        ObservableList<String> list = threadMembersListview.getCheckModel().getCheckedItems();
+
+        JdbcDao jdbc = new JdbcDao();
+
+
+
+        String remove_query = "DELETE from manage_thread WHERE reg = ? and thread_id =? ";
+        String manage_thread_query = "select * from manage_thread WHERE thread_id = ? and reg = ? ";
+
+
+        for(String str : list){
+
+            if(JdbcDao.check_man_thread(selected,str,manage_thread_query)){
+                jdbc.deleteRecord(str,selected,remove_query);
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("warning");
+                alert.setContentText("This Reg-Num : "+str+" is not registered in "+selected+" course");
+                alert.show();
+            }
+
+
+        }
+
+
+        String query = "select * from manage_thread where thread_id = ? order by reg asc";
+        ArrayList<String> list1 = jdbc.memberlist(selected, query);
+
+        threadMembersListview.getItems().clear();
+
+        for(String str : list1){
+            threadMembersListview.getItems().add(str);
+        }
+
+        threadMembersNumberText.setText(String.valueOf(list1.size()));
+
+
+
     }
 
     @FXML
-    private void addUserFromThreadAction(ActionEvent event) {
+    private void addUserFromThreadAction(ActionEvent event) throws IOException {
+
+       ObservableList<String> list = globalListView.getCheckModel().getCheckedItems();
+
+
+        JdbcDao jdbc = new JdbcDao();
+
+
+        String check_query = " select * from manage_thread where reg = ? and thread_id = ? ";
+        String insert_query = "INSERT INTO  manage_thread(thread_id,reg) VALUES (?, ?)";
+
+       for(String str : list){
+           System.out.println(str);
+
+
+           if(JdbcDao.check_user(str,selected,check_query)){
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Information");
+               alert.setContentText("This Registration Number user is already added in this Course");
+               alert.show();
+           }
+           else{
+               jdbc.insertRecord(selected,str,insert_query);
+           }
+
+
+
+       }
+
+
+        String query = "select * from manage_thread where thread_id = ? order by reg asc";
+        ArrayList<String> list1 = jdbc.memberlist(selected, query);
+
+        threadMembersListview.getItems().clear();
+
+        threadMembersNumberText.setText(String.valueOf(list1.size()));
+
+
+        for(String str : list1){
+            threadMembersListview.getItems().add(str);
+        }
+
+
+
     }
 
 

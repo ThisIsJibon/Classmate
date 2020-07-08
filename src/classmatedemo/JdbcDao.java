@@ -30,29 +30,80 @@ public class JdbcDao {
     private static final String DATABASE_PASSWORD = "mahinjibon";
 
 
-
-    public String get_about(String selected,String query){
-        String rst ="";
+    public ArrayList<String> allUser(String query){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
 
-        try(Connection connection = DriverManager
-                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1,selected);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next())
-                rst = resultSet.getString("description");
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            ArrayList<String> list = new ArrayList<>();
+            try(Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(query);
+                while(resultSet.next()){
+
+                    String reg = resultSet.getString("reg");
+                    list.add(reg);
+
+                }
+
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return list;
+
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        return null;
+    }
 
-        return rst;
+
+
+    public ArrayList<String> get_about(String selected,String query){
+        try {
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            ArrayList<String> list = new ArrayList<>();
+            try(Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1,selected);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                String description = resultSet.getString("description");
+                String thread = resultSet.getString("threadname");
+                String pass = resultSet.getString("threadpass");
+                String year = resultSet.getString("threadyear");
+                list.add(thread);
+                list.add(year);
+                list.add(pass);
+                list.add(description);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+            return list;
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

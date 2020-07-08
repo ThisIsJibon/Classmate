@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/lib/fontawesomefx-8.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/fontawesomefx-fontawesome-4.7.0-5.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/fontawesomefx-commons-8.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/controlsfx-9.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

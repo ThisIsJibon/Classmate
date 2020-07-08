@@ -24,7 +24,7 @@ import javafx.stage.Window;
  *
  * @author Asus
  */
-public class ManageThreadController implements Initializable {
+public class   ManageThreadController implements Initializable {
 
     @FXML
     private JFXTextField userRegistrationField;
