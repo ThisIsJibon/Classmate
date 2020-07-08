@@ -1069,7 +1069,15 @@
                                     <Font size="18.0" />
                                  </font>
                               </Text>
-                              <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User" />
+                              <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_remove_administrator_240px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </HBox>
                         <CheckListView fx:id="threadMembersListview" prefHeight="49.0" prefWidth="914.0" />
@@ -1085,7 +1093,15 @@
                                     <Font size="18.0" />
                                  </font>
                               </Text>
-                              <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User" />
+                              <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_add_user_male_240px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </HBox>
                         <CheckListView fx:id="globalListView" prefHeight="53.0" prefWidth="914.0" />

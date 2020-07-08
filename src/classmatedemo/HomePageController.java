@@ -406,6 +406,7 @@ public class HomePageController implements Initializable {
     @FXML
     private void threadButtonAction(ActionEvent event) {
         threadPane.toFront();
+        threadFeedAnchorPane.toFront();
 
         threadComboBox.getItems().clear();
         threadListView.getItems().clear();
@@ -1001,12 +1002,6 @@ public class HomePageController implements Initializable {
         for(String str : list){
             threadMembersListview.getItems().add(str);
         }
-
-
-        String nameString="2018331001";
-        globalListView.getItems().add(nameString);
-        nameString="2018331002";
-        globalListView.getItems().add(nameString);
 
     }
 
