@@ -6,7 +6,7 @@ Class management desktop app with extra functionality for various types of datab
 *A quick tour is added later. \
  \
  <b>We used : </b> \
- i. JDK build 1.9 \
+ i. JavaFX JDK build 9.0 \
  ii. MySQL workbench 8.0 ce <br/> 
 
 <b>Project submission by: </b> \
