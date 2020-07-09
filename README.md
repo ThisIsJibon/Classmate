@@ -14,18 +14,21 @@ Class management desktop app with extra functionality for various types of datab
  \
 Name : Mehedi Hasan Jibon \
 Reg : 2018331002 \
-Email: jibonmh7@gmail.com \
-Github Profile : https://github.com/ThisIsJibon \
+Email : jibonmh7@gmail.com \
+Github : https://github.com/ThisIsJibon \
  \
 Name : Dewan Mahinur Alam \
 Reg : 2018331054 \
-Email: mahinuralam1108@gmail.com \
-Github Profile :  https://github.com/cloudy-day \
+Email : mahinuralam1108@gmail.com \
+Github :  https://github.com/cloudy-day \
  \
  \
  <b>Quick Tour</b> \
- Login Page : 
- ![](resources/images/Screenshot%(45).png)
+ Login Page : \ 
+ ![](resources/images/Screenshot(45).png)
+ \ 
+ Registraion Page : \ 
+ ![](resources/images/Screenshot(46).png)
  \
  \
  \
