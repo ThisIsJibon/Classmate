@@ -23,7 +23,7 @@ Email : mahinuralam1108@gmail.com \
 Github :  https://github.com/cloudy-day \
  \
  \
- <b>Quick Tour</b> 
+ <b>**Quick Tour**</b> 
  <br/>
  
 <br/><br/>
@@ -146,6 +146,6 @@ Github :  https://github.com/cloudy-day \
 
 \ 
 \
-Doc File regarding progress and updates: \
+Doc File regarding progress and updates: <br/>
 https://docs.google.com/document/d/1fHdFukCMtkXDsr2G07qmB741VpvWKCnbW7f6JKBHbRY/edit
 
