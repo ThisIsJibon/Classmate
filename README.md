@@ -1,34 +1,33 @@
 # Classmate
 <b>Project Title </b> : Classmate. \
-<b>Project Link </b>: https://github.com/ThisIsJibon/Classmate \
-<b>Progress </b>: 70% \
-<b>File </b>last updated on : 04-07-2020. \
-<b>Github </b>last updated on : 04-07-2020. \
  \
 <b>Description </b> : \
 Class management desktop app with extra functionality for various types of database queries. \
- \
+A quick tour is added later. \
  \
  <b>We used : </b> \
  i. JavaFX JDK build 9.00 \
  ii. MySQL workbench 8.0 ce \
  iii. icons8 \
- \
+
 <b>Project submission by: </b> \
  \
-Member 1 : \
- \
-Reg : 2018331002 \
 Name : Mehedi Hasan Jibon \
+Reg : 2018331002 \
 Email: jibonmh7@gmail.com \
 Github Profile : https://github.com/ThisIsJibon \
  \
-Member 2 : \
- \
-Reg : 2018331054 \
 Name : Dewan Mahinur Alam \
+Reg : 2018331054 \
 Email: mahinuralam1108@gmail.com \
 Github Profile :  https://github.com/cloudy-day \
+ \
+ \
+ <b>Quick Tour</b> \
+ Login Page : \
+ 
+ \
+ \
  \
 Doc File regarding progress and updates: \
 https://docs.google.com/document/d/1fHdFukCMtkXDsr2G07qmB741VpvWKCnbW7f6JKBHbRY/edit
