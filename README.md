@@ -33,7 +33,7 @@ Github :  https://github.com/cloudy-day \
 
 <br/><br/>
 
-<b>Registraion Window </b> <br/>
+<b>Registraion Window :</b> <br/>
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(46).png)
 
@@ -143,9 +143,7 @@ Github :  https://github.com/cloudy-day \
 
 
 
-
-\ 
-\
+<br/> <br/> <br/>
 Doc File regarding progress and updates: <br/>
 https://docs.google.com/document/d/1fHdFukCMtkXDsr2G07qmB741VpvWKCnbW7f6JKBHbRY/edit
 
