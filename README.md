@@ -5,10 +5,9 @@
 Class management desktop app with extra functionality for various types of database queries. \
 *A quick tour is added later. \
  \
- <b>We used : </b> \
+ <b>Requirements : </b> \
  i. JavaFX JDK build 9.00 \
- ii. MySQL workbench 8.0 ce \
- iii. icons8    <br/> 
+ ii. MySQL workbench 8.0 ce <br/> 
 
 <b>Project submission by: </b> \
  \
@@ -20,9 +19,8 @@ Github : https://github.com/ThisIsJibon \
 Name : Dewan Mahinur Alam \
 Reg : 2018331054 \
 Email : mahinuralam1108@gmail.com \
-Github :  https://github.com/cloudy-day \
- \
- \
+Github :  https://github.com/cloudy-day <br/> <br/>
+
  # Quick Tour
  <br/>
  
