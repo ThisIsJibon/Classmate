@@ -27,7 +27,7 @@ Github :  https://github.com/cloudy-day \
  <br/>
  
 <br/><br/>
-<b>Login Window<\b> : 
+<b>Login Window</b> : 
 Fetches all posts from all threads a user is joined in <br/>
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(45).png)
 
