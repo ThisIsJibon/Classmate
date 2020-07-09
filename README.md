@@ -24,13 +24,9 @@ Github :  https://github.com/cloudy-day \
  \
  \
  <b>Quick Tour</b> \
- Login Page : \ 
- ![](resources/images/Screenshot(45).png)
+![](resources/images/Screenshot(45).png)
  \ 
- Registraion Page : \ 
- ![](resources/images/Screenshot(46).png)
- \
- \
+ Login Page \
  \
 Doc File regarding progress and updates: \
 https://docs.google.com/document/d/1fHdFukCMtkXDsr2G07qmB741VpvWKCnbW7f6JKBHbRY/edit
