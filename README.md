@@ -60,14 +60,14 @@ Registraion Window<br/>
 
 
 <br/><br/>
-<b>Thread Members<\b> : Shows details all members in a specific thread also gives functionality o add/remove user <br/>
+<b>Thread Members</b> : Shows details all members in a specific thread also gives functionality to add/remove user <br/>
 
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(50).png)
 
 
 <br/><br/>
-<b>Manage Thread  </b> : Gives functionality to update thread members/ password/ details about thread <br/>
+<b>Manage Thread  </b> : Gives functionality to update thread members/password/details about thread <br/>
 
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(51).png)
