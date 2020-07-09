@@ -8,7 +8,7 @@ Class management desktop app with extra functionality for various types of datab
  <b>We used : </b> \
  i. JavaFX JDK build 9.00 \
  ii. MySQL workbench 8.0 ce \
- iii. icons8    \ 
+ iii. icons8    <br/> 
 
 <b>Project submission by: </b> \
  \
@@ -33,12 +33,12 @@ Github :  https://github.com/cloudy-day \
 
 <br/><br/>
 
-Registraion Window<br/>
+<b>Registraion Window </b> <br/>
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(46).png)
 
 <br/><br/>
-<b>HomePage </b> : Fetches all posts from all threads a user is joined in <br/>
+<b>HomePage </b> : Fetches all posts from all threads a user has joined <br/>
 
 
 
