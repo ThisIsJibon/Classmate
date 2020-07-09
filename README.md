@@ -23,7 +23,7 @@ Email : mahinuralam1108@gmail.com \
 Github :  https://github.com/cloudy-day \
  \
  \
- <b>**Quick Tour**</b> 
+ # Quick Tour
  <br/>
  
 <br/><br/>
