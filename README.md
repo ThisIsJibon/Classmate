@@ -23,10 +23,12 @@ Email : mahinuralam1108@gmail.com \
 Github :  https://github.com/cloudy-day \
  \
  \
- <b>Quick Tour</b> \
- \
- Login Window<br/>
- \ 
+ <b>Quick Tour</b> 
+ <br/>
+ 
+<br/><br/>
+<b>Login Window<\b> : 
+Fetches all posts from all threads a user is joined in <br/>
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(45).png)
 
 <br/><br/>
@@ -58,7 +60,7 @@ Registraion Window<br/>
 
 
 <br/><br/>
-<b>Thread Members <\b> : Shows details all members in a specific thread also gives functionality o add/remove user <br/>
+<b>Thread Members<\b> : Shows details all members in a specific thread also gives functionality o add/remove user <br/>
 
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(50).png)
@@ -95,7 +97,7 @@ Registraion Window<br/>
 
 
 <br/><br/>
-<b>NOtification  <\b> : Not yet functional <br/>
+<b>Notification  <\b> : Not yet functional <br/>
 
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(55).png)
@@ -116,16 +118,16 @@ Registraion Window<br/>
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(57).png)
 
 
-<br/><br/>
-<b>Important <\b> : Gives functionality to save posts for a user to watch later <br/>
-
-
-![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(58).png)
-
 
 <br/><br/>
 <b>Post deadline <\b> : Gives functionality to post a deadline for a specific thread <br/>
 
+![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(58).png)
+
+
+
+<br/><br/>
+<b>Searchbox <\b> : Gives functionality to query on various expertise and shows corresponding result <br/>
 
 ![](https://github.com/ThisIsJibon/Classmate/blob/master/resources/images/Screenshot(59).png)
 
