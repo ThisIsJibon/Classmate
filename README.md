@@ -3,7 +3,7 @@
  \
 <b>Description </b> : \
 Class management desktop app with extra functionality for various types of database queries. \
-A quick tour is added later. \
+*A quick tour is added later. \
  \
  <b>We used : </b> \
  i. JavaFX JDK build 9.00 \
@@ -24,8 +24,8 @@ Github Profile :  https://github.com/cloudy-day \
  \
  \
  <b>Quick Tour</b> \
- Login Page : \
- 
+ Login Page : 
+ ![](resources/images/Screenshot%(45).png)
  \
  \
  \
