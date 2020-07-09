@@ -5,8 +5,8 @@
 Class management desktop app with extra functionality for various types of database queries. \
 *A quick tour is added later. \
  \
- <b>Requirements : </b> \
- i. JavaFX JDK build 9.00 \
+ <b>We used : </b> \
+ i. JDK build 1.9 \
  ii. MySQL workbench 8.0 ce <br/> 
 
 <b>Project submission by: </b> \
