@@ -613,7 +613,7 @@
                                        </VBox.margin>
                                     </ImageView>
                                     <JFXCheckBox fx:id="searchboxBloodCheck" prefHeight="43.0" prefWidth="200.0" text="Available for Blood" />
-                                    <JFXButton fx:id="searchInSearchboxButton" onAction="#searchInSearchboxButton" prefHeight="46.0" prefWidth="200.0" text="Search">
+                                    <JFXButton fx:id="searchInSearchboxButton" onAction="#searchInSearchboxButton" onMouseMoved="#searchInSearchboxMouseMoved" prefHeight="46.0" prefWidth="200.0" text="Search">
                                        <graphic>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

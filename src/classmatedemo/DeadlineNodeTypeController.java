@@ -74,8 +74,16 @@ public class DeadlineNodeTypeController extends ListCell<DeadlineType> {
     @FXML
     private void doneButtonAction(ActionEvent event) {
 
+        String date = dateText.getText();
+        String task = taskHeadlineText.getText();
+        String time = timeText.getText();
+        String description = descriptionText.getText();
+        String thread = threadText.getText();
+        String ok="1";
 
-
+        String query = "UPDATE deadline SET done = ? WHERE thread = ? and task = ? and dat = ?  and description = ?";
+        JdbcDao jdbc = new JdbcDao();
+        jdbc.update_deadline(ok,thread,task,date,description,query);
     }
 
     

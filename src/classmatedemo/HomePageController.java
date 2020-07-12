@@ -17,6 +17,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.awt.*;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -48,6 +49,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -369,7 +372,7 @@ public class HomePageController implements Initializable {
 
         homePageInitialize();
     }
-    void homePageInitialize(){
+    private void homePageInitialize(){
         homePane.toFront();
         homeListView.getItems().clear();
 
@@ -484,10 +487,21 @@ public class HomePageController implements Initializable {
         importantPane.toFront();
         importantListview.getItems().clear();
         studentObservableList = FXCollections.observableArrayList();
-        studentObservableList.addAll(
+        /***studentObservableList.addAll(
                 new postType("kalke exam", "3-04-2010", "Mahin", "5:50 PM"),
                 new postType("gjgjhgjhjgjgjgjghjg", "19-03-2013","Mehedi", "5:10 AM")
-        );
+        );*/
+
+        String query = "select * from important where reg = ?";
+        JdbcDao jdbc = new JdbcDao();
+        ArrayList<ArrayList<String>> list = jdbc.get_important(reg,query);
+
+        for(int i=0;i<list.size();i++){
+            studentObservableList.add( new postType(list.get(i).get(3), list.get(i).get(1), list.get(i).get(0), list.get(i).get(2)));
+        }
+
+
+
         importantListview.setItems(studentObservableList);
         importantListview.setCellFactory(NodeTypeLargeController -> new NodeTypeLargeController());
         
@@ -740,8 +754,8 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date,time) VALUES (?, ?, ?, ?, ?,?) ";
-            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj), df1.format(dateobj),query);
+            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date,time,ordering) VALUES (?, ?, ?, ?, ?,?,?) ";
+            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj), df1.format(dateobj),df.format(dateobj)+df1.format(dateobj),query);
 
             postInThreadTextfield.setText("");
             
@@ -764,8 +778,8 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,time) VALUES (?, ?, ?, ?, ?,?) ";
-            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj),df1.format(dateobj) ,query);
+            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,ordering,time) VALUES (?, ?,?, ?, ?, ?,?) ";
+            jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj),df1.format(dateobj) ,df.format(dateobj)+df1.format(dateobj),query);
 
             postInThreadTextfield.setText("");
 
@@ -881,7 +895,7 @@ public class HomePageController implements Initializable {
         isFeedClicked=true;
         
         JdbcDao jdbc = new JdbcDao();
-        String query = "select * from news_feed where thread_id = ? order by date desc ";
+        String query = "select * from news_feed where thread_id = ? order by ordering desc ";
         threadListView.getItems().clear();
         ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
 
@@ -932,7 +946,7 @@ public class HomePageController implements Initializable {
         List<Hyperlink> links = new ArrayList<>();
 
         JdbcDao jdbc = new JdbcDao();
-        String query = "select * from resource where thread_id = ? order by date desc ";
+        String query = "select * from resource where thread_id = ? order by ordering desc ";
        
         ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
         for (int i=0;i<list.size();i++) {
@@ -1246,6 +1260,10 @@ public class HomePageController implements Initializable {
 
     }
 
+
+
+
+
     @FXML
     private void setDeadlineButtonAction(ActionEvent event) {
         postDeadlinePane.toFront();
@@ -1307,13 +1325,6 @@ public class HomePageController implements Initializable {
             if(JdbcDao.check_man_thread(selected,str,manage_thread_query)){
                 jdbc.deleteRecord(str,selected,remove_query);
             }
-            else{
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("warning");
-                alert.setContentText("This Reg-Num : "+str+" is not registered in "+selected+" course");
-                alert.show();
-            }
-
 
         }
 
@@ -1352,7 +1363,7 @@ public class HomePageController implements Initializable {
            if(JdbcDao.check_user(str,selected,check_query)){
                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                alert.setTitle("Information");
-               alert.setContentText("This Registration Number user is already added in this Course");
+               alert.setContentText("This Registration Number "+str+" is already added in this Course");
                alert.show();
            }
            else{
@@ -1380,6 +1391,10 @@ public class HomePageController implements Initializable {
 
     }
 
+    @FXML
+    private void searchInSearchboxMouseMoved(MouseEvent mouseEvent) {
 
+
+    }
 }
 

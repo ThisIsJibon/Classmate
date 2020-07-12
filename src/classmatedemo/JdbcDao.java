@@ -198,7 +198,7 @@ public class JdbcDao {
 
 
 
-    public void insertRecord_feed (String name,String reg, String thread_id, String feed,String date,String time,String query) throws SQLException {
+    public void insertRecord_feed (String name,String reg, String thread_id, String feed,String date,String time,String ordering,String query) throws SQLException {
 
         // load and register JDBC driver for MySQL
         try {
@@ -221,6 +221,7 @@ public class JdbcDao {
             preparedStatement.setString(4, feed);
             preparedStatement.setString(5, date);
             preparedStatement.setString(6, time);
+            preparedStatement.setString(7, ordering);
 
 
 
@@ -259,6 +260,42 @@ public class JdbcDao {
             preparedStatement.setString(6, reg);
             preparedStatement.setString(7, done);
             preparedStatement.setString(8, date);
+
+
+
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+    }
+    public void insert_important (String name,String date, String time, String post,String done,String roll,String query) throws SQLException {
+
+        // load and register JDBC driver for MySQL
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        // Step 1: Establishing a Connection and
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            preparedStatement.setString(4, post);
+            preparedStatement.setString(5, done);
+            preparedStatement.setString(6, roll);
+
 
 
 
@@ -905,6 +942,94 @@ public class JdbcDao {
     }
 
 
+    public ArrayList<ArrayList<String>> get_important(String reg,String query){
+        try{
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+
+
+
+            try (Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+                 PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1,reg);
+                ResultSet resultSet = statement.executeQuery();
+                while(resultSet.next()){
+                    ArrayList<String> list1 = new ArrayList<>();
+                    String name = resultSet.getString("name");
+                    String time = resultSet.getString("time");
+                    String date = resultSet.getString("date");
+                    String description = resultSet.getString("description");
+
+                    list1.add(name);
+                    list1.add(date);
+                    list1.add(time);
+                    list1.add(description);
+                    list.add(list1);
+
+
+                }
+                resultSet.close();
+
+            } catch (Exception e) {
+                // print SQL exception information
+                e.printStackTrace();
+            }
+            return list;
+
+        }catch (Exception e) {
+            // print SQL exception information
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
+
+
+
+
+    public void update_deadline(String done,String thread,String task,String date,String description,String query){
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, done);
+            preparedStatement.setString(2, thread);
+            preparedStatement.setString(3, task);
+            preparedStatement.setString(4, date);
+            preparedStatement.setString(5, description);
+
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+
+    }
 
 
 
