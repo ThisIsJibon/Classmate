@@ -778,7 +778,7 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,ordering,time) VALUES (?, ?,?, ?, ?, ?,?) ";
+            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,time,ordering) VALUES (?, ?,?, ?, ?, ?,?) ";
             jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj),df1.format(dateobj) ,df.format(dateobj)+df1.format(dateobj),query);
 
             postInThreadTextfield.setText("");
@@ -951,7 +951,7 @@ public class HomePageController implements Initializable {
         ArrayList<ArrayList<String>> list = jdbc.feed(selected, query);
         for (int i=0;i<list.size();i++) {
             System.out.println(list.get(i).get(2));
-            Hyperlink link = new Hyperlink(list.get(i).get(2).toString());
+            Hyperlink link = new Hyperlink(list.get(i).get(2));
             links.add(link);
             htmListView.getItems().add(link);
         }
