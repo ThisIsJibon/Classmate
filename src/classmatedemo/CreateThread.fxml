@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextArea?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.CreateThreadController">
    <children>
@@ -50,7 +51,7 @@
                </image>
             </ImageView>
             <JFXTextField fx:id="threadYearField" layoutX="227.0" layoutY="213.0" prefHeight="43.0" prefWidth="288.0" promptText="Thread Year" styleClass="textfield" />
-            <TextField fx:id="threadDescField" layoutX="231.0" layoutY="287.0" prefHeight="79.0" prefWidth="281.0" promptText="Thread Description" />
+            <TextArea fx:id="threadDescField" layoutX="231.0" layoutY="287.0" prefHeight="79.0" prefWidth="281.0" promptText="Thread Description" />
          </children>
       </Pane>
    </children>

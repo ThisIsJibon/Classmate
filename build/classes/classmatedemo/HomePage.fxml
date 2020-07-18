@@ -899,7 +899,7 @@
                                                 <Insets left="50.0" right="50.0" />
                                              </VBox.margin>
                                           </JFXTextField>
-                                          <TextField fx:id="taskDescriptionField" prefHeight="160.0" prefWidth="630.0" promptText="                                           Describe the task!" />
+                                          <TextArea fx:id="taskDescriptionField" prefHeight="160.0" prefWidth="630.0" promptText="                                           Describe the task!" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                              <children>
                                                 <JFXButton fx:id="postTaskButton" onAction="#postTaskButtonAction" prefHeight="49.0" prefWidth="140.0" text="Post Deadline !">

@@ -35,7 +35,7 @@ public class CreateThreadController implements Initializable {
     @FXML
     private JFXTextField threadYearField;
     @FXML
-    private TextField threadDescField;
+    private javafx.scene.control.TextArea threadDescField;
 
     /**
      * Initializes the controller class.

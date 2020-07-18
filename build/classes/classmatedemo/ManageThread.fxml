@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextArea?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classmatedemo.ManageThreadController">
    <children>
@@ -21,7 +22,7 @@
             </JFXTextField>
             <JFXButton fx:id="addUserButton" layoutX="375.0" layoutY="216.0" onAction="#addUserButtonAction" prefHeight="27.0" prefWidth="86.0" styleClass="login-button" text="Add user" />
             <JFXButton fx:id="removeUserButton" layoutX="487.0" layoutY="216.0" onAction="#removeUserButtonAction" styleClass="login-button" text="Remove user" />
-            <TextField fx:id="updateDescriptionField" layoutX="139.0" layoutY="263.0" prefHeight="94.0" prefWidth="438.0" promptText="Update Description" />
+            <TextArea fx:id="updateDescriptionField" layoutX="139.0" layoutY="263.0" prefHeight="94.0" prefWidth="438.0" promptText="Update Description" />
             <JFXTextField fx:id="threadNameField" focusColor="#2b2b52" layoutX="139.0" layoutY="117.0" prefHeight="40.0" prefWidth="201.0" promptText="Thread name" styleClass="textfield" unFocusColor="WHITE">
                <font>
                   <Font size="15.0" />

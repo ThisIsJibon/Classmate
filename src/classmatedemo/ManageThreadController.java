@@ -33,7 +33,7 @@ public class   ManageThreadController implements Initializable {
     @FXML
     private JFXButton removeUserButton;
     @FXML
-    private TextField updateDescriptionField;
+    private javafx.scene.control.TextArea updateDescriptionField;
     @FXML
     private JFXTextField threadNameField;
     @FXML

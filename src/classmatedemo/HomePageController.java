@@ -327,7 +327,7 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXTextField taskNameField;
     @FXML
-    private TextField taskDescriptionField;
+    private javafx.scene.control.TextArea taskDescriptionField;
     @FXML
     private JFXButton postTaskButton;
     @FXML
