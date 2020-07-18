@@ -166,7 +166,7 @@ public class HomePageController implements Initializable {
     @FXML
     private JFXButton undoInThreadButton;
     @FXML
-    private TextField postInThreadTextfield;
+    private javafx.scene.control.TextArea postInThreadTextfield;
     @FXML
     private JFXButton callButton;
     @FXML
@@ -1391,10 +1391,5 @@ public class HomePageController implements Initializable {
 
     }
 
-    @FXML
-    private void searchInSearchboxMouseMoved(MouseEvent mouseEvent) {
-
-
-    }
 }
 

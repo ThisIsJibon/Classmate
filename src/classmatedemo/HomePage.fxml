@@ -13,6 +13,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -636,114 +637,6 @@
                   </HBox>
                </children>
                 </Pane>
-                <Pane id="threadPane" fx:id="threadPane" layoutX="60.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <HBox prefHeight="685.0" prefWidth="918.0">
-                            <children>
-                                <ScrollPane fx:id="feedScrollPane" prefHeight="445.0" prefWidth="722.0">
-                                    <content>
-                                        <AnchorPane fx:id="threadFeedAnchorPane" minHeight="0.0" minWidth="0.0" prefWidth="703.0">
-                                            <children>
-                                                <VBox fx:id="threadFeedAnchorPaneVbox" prefHeight="685.0" prefWidth="702.0">
-                                                    <children>
-                                                        <HBox fx:id="threadFeedAnchorPaneHbox" prefHeight="134.0" prefWidth="702.0">
-                                                            <children>
-                                                                <TextField fx:id="postInThreadTextfield" prefHeight="195.0" prefWidth="566.0" promptText="Post Something!" />
-                                                                <VBox prefHeight="134.0" prefWidth="134.0">
-                                                                    <children>
-                                                                        <JFXButton fx:id="postInThreadButton" onAction="#postInThreadButtonAction" prefHeight="71.0" prefWidth="134.0" text="Post">
-                                                                            <graphic>
-                                                                                <ImageView fitHeight="28.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                                                                    <image>
-                                                                                        <Image url="@icons/icons8_email_send_60px.png" />
-                                                                                    </image>
-                                                                                </ImageView>
-                                                                            </graphic>
-                                                                        </JFXButton>
-                                                                        <JFXButton fx:id="undoInThreadButton" layoutX="10.0" layoutY="10.0" onAction="#undoInThreadButtonAction" prefHeight="62.0" prefWidth="134.0" text="Undo">
-                                                                            <graphic>
-                                                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                                                    <image>
-                                                                                        <Image url="@icons/icons8_delete_240px.png" />
-                                                                                    </image>
-                                                                                </ImageView>
-                                                                            </graphic>
-                                                                        </JFXButton>
-                                                                    </children>
-                                                                </VBox>
-                                                            </children>
-                                                        </HBox>
-                                          <ListView fx:id="threadListView" prefHeight="549.0" prefWidth="702.0" />
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                    <HBox.margin>
-                                        <Insets />
-                                    </HBox.margin>
-                                </ScrollPane>
-                                <AnchorPane prefHeight="686.0" prefWidth="198.0" styleClass="root" stylesheets="@light-theme.css">
-                                    <children>
-                                        <VBox alignment="TOP_RIGHT" prefHeight="685.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <Label alignment="CENTER" graphicTextGap="5.0" prefHeight="30.0" prefWidth="200.0" text="Current Thread">
-                                                    <font>
-                                                        <Font name="System Bold" size="15.0" />
-                                                    </font>
-                                                    <graphic>
-                                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@icons/icons8_more_than_60px.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </graphic>
-                                                </Label>
-                                                <JFXComboBox fx:id="threadComboBox" onAction="#threadComboBoxAction" prefHeight="30.0" prefWidth="198.0" promptText="                  Select a Thread" />
-                                                <Label prefHeight="35.0" prefWidth="200.0" />
-                                                <Label alignment="CENTER" graphicTextGap="10.0" prefHeight="35.0" prefWidth="200.0" text="Options">
-                                                    <font>
-                                                        <Font name="System Bold" size="15.0" />
-                                                    </font>
-                                                    <graphic>
-                                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@icons/icons8_features_list_100px.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </graphic>
-                                                </Label>
-                                                <JFXButton fx:id="AboutButton" onAction="#AboutButtonAction" prefHeight="35.0" prefWidth="200.0" text="About" />
-                                                <JFXButton fx:id="FeedButton" onAction="#FeedButtonAction" prefHeight="35.0" prefWidth="200.0" text="Feed" />
-                                                <JFXButton fx:id="ResourcesButton" onAction="#ResourcesButtonAction" prefHeight="35.0" prefWidth="200.0" text="Resources" />
-                                                <JFXButton fx:id="MembersButton" onAction="#MembersButtonAction" prefHeight="35.0" prefWidth="200.0" text="Members" />
-                                                <JFXButton fx:id="ArchivesButton" onAction="#ArchivesButtonAction" prefHeight="35.0" prefWidth="200.0" text="Archives" />
-                                                <Label prefHeight="35.0" prefWidth="200.0" />
-                                                <Label alignment="CENTER" graphicTextGap="10.0" prefHeight="35.0" prefWidth="200.0" text="Settings">
-                                                    <font>
-                                                        <Font name="System Bold" size="15.0" />
-                                                    </font>
-                                                    <graphic>
-                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@icons/icons8_settings_100px.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                    </graphic>
-                                                </Label>
-                                                <JFXButton fx:id="manageThreadButton" onAction="#manageThreadButtonAction" prefHeight="35.0" prefWidth="200.0" text="Manage Thread" />
-                                                <JFXButton fx:id="createThreadButton" onAction="#createThreadButtonAction" prefHeight="35.0" prefWidth="218.0" text="Create a Thread" />
-                                            </children>
-                                            <padding>
-                                                <Insets bottom="150.0" top="150.0" />
-                                            </padding>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </HBox>
-                    </children>
-                </Pane>
                 <Pane id="homePane" fx:id="homePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <VBox prefHeight="686.0" prefWidth="918.0">
@@ -1137,6 +1030,114 @@
                   </VBox>
                </children>
             </Pane>
+                <Pane id="threadPane" fx:id="threadPane" layoutX="60.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EAF0F1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <HBox prefHeight="685.0" prefWidth="918.0">
+                            <children>
+                                <ScrollPane fx:id="feedScrollPane" prefHeight="445.0" prefWidth="722.0">
+                                    <content>
+                                        <AnchorPane fx:id="threadFeedAnchorPane" minHeight="0.0" minWidth="0.0" prefWidth="703.0">
+                                            <children>
+                                                <VBox fx:id="threadFeedAnchorPaneVbox" prefHeight="685.0" prefWidth="702.0">
+                                                    <children>
+                                                        <HBox fx:id="threadFeedAnchorPaneHbox" prefHeight="134.0" prefWidth="702.0">
+                                                            <children>
+                                                <TextArea fx:id="postInThreadTextfield" prefHeight="134.0" prefWidth="595.0" promptText="Post Something!" />
+                                                                <VBox prefHeight="134.0" prefWidth="134.0">
+                                                                    <children>
+                                                                        <JFXButton fx:id="postInThreadButton" onAction="#postInThreadButtonAction" prefHeight="71.0" prefWidth="134.0" text="Post">
+                                                                            <graphic>
+                                                                                <ImageView fitHeight="28.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                                                                    <image>
+                                                                                        <Image url="@icons/icons8_email_send_60px.png" />
+                                                                                    </image>
+                                                                                </ImageView>
+                                                                            </graphic>
+                                                                        </JFXButton>
+                                                                        <JFXButton fx:id="undoInThreadButton" layoutX="10.0" layoutY="10.0" onAction="#undoInThreadButtonAction" prefHeight="62.0" prefWidth="134.0" text="Undo">
+                                                                            <graphic>
+                                                                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                                                    <image>
+                                                                                        <Image url="@icons/icons8_delete_240px.png" />
+                                                                                    </image>
+                                                                                </ImageView>
+                                                                            </graphic>
+                                                                        </JFXButton>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                          <ListView fx:id="threadListView" prefHeight="549.0" prefWidth="702.0" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </ScrollPane>
+                                <AnchorPane prefHeight="686.0" prefWidth="198.0" styleClass="root" stylesheets="@light-theme.css">
+                                    <children>
+                                        <VBox alignment="TOP_RIGHT" prefHeight="685.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <Label alignment="CENTER" graphicTextGap="5.0" prefHeight="30.0" prefWidth="200.0" text="Current Thread">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                    <graphic>
+                                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@icons/icons8_more_than_60px.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Label>
+                                                <JFXComboBox fx:id="threadComboBox" onAction="#threadComboBoxAction" prefHeight="30.0" prefWidth="198.0" promptText="                  Select a Thread" />
+                                                <Label prefHeight="35.0" prefWidth="200.0" />
+                                                <Label alignment="CENTER" graphicTextGap="10.0" prefHeight="35.0" prefWidth="200.0" text="Options">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                    <graphic>
+                                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@icons/icons8_features_list_100px.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Label>
+                                                <JFXButton fx:id="AboutButton" onAction="#AboutButtonAction" prefHeight="35.0" prefWidth="200.0" text="About" />
+                                                <JFXButton fx:id="FeedButton" onAction="#FeedButtonAction" prefHeight="35.0" prefWidth="200.0" text="Feed" />
+                                                <JFXButton fx:id="ResourcesButton" onAction="#ResourcesButtonAction" prefHeight="35.0" prefWidth="200.0" text="Resources" />
+                                                <JFXButton fx:id="MembersButton" onAction="#MembersButtonAction" prefHeight="35.0" prefWidth="200.0" text="Members" />
+                                                <JFXButton fx:id="ArchivesButton" onAction="#ArchivesButtonAction" prefHeight="35.0" prefWidth="200.0" text="Archives" />
+                                                <Label prefHeight="35.0" prefWidth="200.0" />
+                                                <Label alignment="CENTER" graphicTextGap="10.0" prefHeight="35.0" prefWidth="200.0" text="Settings">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                    <graphic>
+                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                            <image>
+                                                                <Image url="@icons/icons8_settings_100px.png" />
+                                                            </image>
+                                                        </ImageView>
+                                                    </graphic>
+                                                </Label>
+                                                <JFXButton fx:id="manageThreadButton" onAction="#manageThreadButtonAction" prefHeight="35.0" prefWidth="200.0" text="Manage Thread" />
+                                                <JFXButton fx:id="createThreadButton" onAction="#createThreadButtonAction" prefHeight="35.0" prefWidth="218.0" text="Create a Thread" />
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="150.0" top="150.0" />
+                                            </padding>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </Pane>
             </children>
         </AnchorPane>
     </children>
