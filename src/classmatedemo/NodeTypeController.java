@@ -23,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import java.util.*;
 import java.lang.*;
+import javafx.scene.control.ToggleButton;
 
 /**
  * FXML Controller class
@@ -43,10 +44,11 @@ public class NodeTypeController extends ListCell<postType>{
     @FXML
     private Text timeText;
     @FXML
-    private Button saveButton;
+    private ToggleButton saveButton;
     @FXML
     private BorderPane gridPane;
     private FXMLLoader mLLoader;
+    public static int buttonState=0;
 
     /**
      * Initializes the controller class.
@@ -99,9 +101,18 @@ public class NodeTypeController extends ListCell<postType>{
 
     @FXML
     private void saveButtonAction(ActionEvent event) throws SQLException {
+        
+        if(saveButton.isSelected()){
+            System.out.println("query hobe");
+            saveButton.setText("Unsave");
+        }
+        else{
+            saveButton.setText("Save");
+            System.out.println("query delete hobe");
+        }
 
 
-        System.out.println("clicksssssssssss");
+        /*System.out.println("clicksssssssssss");
         String date = dateText.getText();
         String time = timeText.getText();
         String post = postText.getText();
@@ -115,7 +126,7 @@ public class NodeTypeController extends ListCell<postType>{
         String query = "INSERT INTO important (name,date,time,description,done,reg) VALUES (?,?,?,?,?,?) ";
 
         JdbcDao jdbc = new JdbcDao();
-        jdbc.insert_important(name,date,time,post,ok,roll,query);
+        jdbc.insert_important(name,date,time,post,ok,roll,query);*/
 
 
     }
