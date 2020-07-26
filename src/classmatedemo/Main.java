@@ -24,7 +24,8 @@ public class Main extends Application {
        Stage window=new Stage();
        window.setScene(scene);
        window.setTitle("Please Login");
-       window.show();   
+       window.show();  
+       window.setResizable(false);
        
     }
 

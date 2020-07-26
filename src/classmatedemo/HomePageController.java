@@ -86,7 +86,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -356,6 +359,8 @@ public class HomePageController implements Initializable {
     private CheckListView<String> globalListView;
     @FXML
     private CheckListView<String> threadMembersListview;
+    @FXML
+    private PasswordField threadAboutMembersPasswordfield;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -858,7 +863,8 @@ public class HomePageController implements Initializable {
 
                 aboutThreadNameText.setText(list.get(0));
                 aboutThreadMembersText.setText(String.valueOf(list1.size()));
-                aboutThreadPasswordText.setText(list.get(2));
+                //aboutThreadPasswordText.setText(list.get(2));
+                aboutThreadPasswordText.setText("N/A");
                 aboutThreadYearText.setText(list.get(1));
                 aboutThreadDescText.setText(list.get(3));
 
@@ -1016,6 +1022,34 @@ public class HomePageController implements Initializable {
         for(String str : list){
             threadMembersListview.getItems().add(str);
         }
+        
+        globalListView.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    System.out.println("press korse");
+                    int index= globalListView.getSelectionModel().getSelectedIndex();
+                    System.out.println("state is "+ globalListView.getItemBooleanProperty(index));
+                    String chk = globalListView.getSelectionModel().getSelectedItem();
+                    System.out.println("chk is "+chk);
+                    
+                }
+            }
+        });
+        threadMembersListview.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent ke)
+            {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                    System.out.println("press korse");
+                }
+            }
+        });
 
     }
 
