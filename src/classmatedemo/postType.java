@@ -26,19 +26,24 @@ public class postType {
     public String getTimeText() {
         return timeText;
     }
+    public String getStateText() {
+        return stateText;
+    }
     private String postText;
     private String dateText;
     private String nameText;
     private String timeText;
+    private String stateText;
 
     public postType() {
     }
 
-    public postType(String postText, String dateText, String nameText, String timeText) {
+    public postType(String postText, String dateText, String nameText, String timeText,String stateText) {
         this.postText = postText;
         this.dateText = dateText;
         this.nameText = nameText;
         this.timeText = timeText;
+        this.stateText = stateText;
     }
     
     

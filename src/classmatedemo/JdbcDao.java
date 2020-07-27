@@ -311,6 +311,47 @@ public class JdbcDao {
 
 
 
+    public void delete_important (String name,String date, String time, String post,String done,String roll,String query) throws SQLException {
+
+        // load and register JDBC driver for MySQL
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        // Step 1: Establishing a Connection and
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            preparedStatement.setString(4, post);
+            preparedStatement.setString(5, done);
+            preparedStatement.setString(6, roll);
+
+
+
+
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+    }
+
+
+
+
+
     public void insertRecord(String thread_id, String reg,String query) throws IOException {
 
         // load and register JDBC driver for MySQL
@@ -810,11 +851,13 @@ public class JdbcDao {
                     String date = resultSet.getString("date");
                     String text = resultSet.getString("feed");
                     String time = resultSet.getString("time");
+                    String state = resultSet.getString("state");
                     //list.add(name+"\n"+date+"\n"+text+"\n");
                     list1.add(name);
                     list1.add(date);
                     list1.add(text);
                     list1.add(time);
+                    list1.add(state);
                     list.add(list1);
                 }
                 resultSet.close();
@@ -991,6 +1034,39 @@ public class JdbcDao {
         }
 
         return null;
+
+    }
+
+    public static boolean check_important(String name,String date,String time ,String description,String reg,String query) throws SQLException {
+
+        boolean status = false;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        try(Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,date);
+            preparedStatement.setString(3,time);
+            preparedStatement.setString(4,description);
+            preparedStatement.setString(5,reg);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            status = resultSet.next();
+            preparedStatement.close();
+            return status;
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return status;
 
     }
 

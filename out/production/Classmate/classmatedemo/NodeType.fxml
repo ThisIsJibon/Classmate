@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,7 +12,7 @@
    <top>
       <HBox spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="26.0" prefWidth="611.0">
+            <HBox prefHeight="26.0" prefWidth="602.0">
                <children>
                   <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="286.93670654296875">
                      <font>
@@ -24,7 +24,7 @@
                   </Text>
                </children>
             </HBox>
-            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
+            <ToggleButton fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="26.0" prefWidth="54.0" text="Save" />
          </children>
          <BorderPane.margin>
             <Insets right="10.0" top="10.0" />

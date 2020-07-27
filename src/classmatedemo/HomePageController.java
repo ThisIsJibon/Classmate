@@ -397,7 +397,7 @@ public class HomePageController implements Initializable {
         studentObservableList = FXCollections.observableArrayList();
 
         for(int i=0;i<list.size();i++){
-            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
+            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4),"0"));
         }
 
         homeListView.setItems(studentObservableList);
@@ -476,7 +476,7 @@ public class HomePageController implements Initializable {
         studentObservableList = FXCollections.observableArrayList();
 
         for(int i=0;i<list.size();i++){
-            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4)));
+            studentObservableList.add(new postType(list.get(i).get(3), list.get(i).get(2),list.get(i).get(0), list.get(i).get(4),"0"));
         }
 
         /**studentObservableList.addAll(
@@ -502,7 +502,7 @@ public class HomePageController implements Initializable {
         ArrayList<ArrayList<String>> list = jdbc.get_important(reg,query);
 
         for(int i=0;i<list.size();i++){
-            studentObservableList.add( new postType(list.get(i).get(3), list.get(i).get(1), list.get(i).get(0), list.get(i).get(2)));
+            studentObservableList.add( new postType(list.get(i).get(3), list.get(i).get(1), list.get(i).get(0), list.get(i).get(2),"0"));
         }
 
 
@@ -759,7 +759,7 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date,time,ordering) VALUES (?, ?, ?, ?, ?,?,?) ";
+            String query = "INSERT INTO news_feed (name,reg,thread_id,feed,date,time,ordering) VALUES (?, ?, ?, ?,?,?,?) ";
             jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj), df1.format(dateobj),df.format(dateobj)+df1.format(dateobj),query);
 
             postInThreadTextfield.setText("");
@@ -783,7 +783,7 @@ public class HomePageController implements Initializable {
             // htmlEditor.setHtmlText("<i>"+name+"</i>");
 
             String feed = postInThreadTextfield.getText().trim();
-            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,time,ordering) VALUES (?, ?,?, ?, ?, ?,?) ";
+            String query = "INSERT INTO resource (name,reg,thread_id,feed,date,time,ordering) VALUES (?,?, ?,?, ?, ?, ?) ";
             jdbc.insertRecord_feed(name, reg, selected, feed, df.format(dateobj),df1.format(dateobj) ,df.format(dateobj)+df1.format(dateobj),query);
 
             postInThreadTextfield.setText("");
@@ -880,7 +880,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void FeedButtonAction(ActionEvent actionEvent) {
+    private void FeedButtonAction(ActionEvent actionEvent) throws SQLException{
 
 
         postInThreadTextfield.setText("");
@@ -909,7 +909,15 @@ public class HomePageController implements Initializable {
         studentObservableList = FXCollections.observableArrayList();
 
         for (int i=0;i<list.size();i++) {
-            studentObservableList.add(new postType(list.get(i).get(2), list.get(i).get(1), list.get(i).get(0),list.get(i).get(3)));
+
+            String query1 = "select * from important where name = ? and date = ? and time = ? and description = ? and reg = ?";
+
+            String ok;
+            if (JdbcDao.check_important(list.get(i).get(0), list.get(i).get(1), list.get(i).get(3), list.get(i).get(2), reg, query1))
+                ok = "1";
+            else ok = "0";
+
+            studentObservableList.add(new postType(list.get(i).get(2), list.get(i).get(1), list.get(i).get(0),list.get(i).get(3),ok));
         }
 
        /** studentObservableList.addAll(

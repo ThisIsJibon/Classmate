@@ -44,6 +44,8 @@ public class NodeTypeController extends ListCell<postType>{
     @FXML
     private Text timeText;
     @FXML
+    private Text stateText;
+    @FXML
     private ToggleButton saveButton;
     @FXML
     private BorderPane gridPane;
@@ -92,8 +94,14 @@ public class NodeTypeController extends ListCell<postType>{
             nameText.setText(student.getNameText());
             postText.setText(student.getPostText());
             timeText.setText(student.getTimeText());
-
-            setText(null);
+            if(student.getStateText()=="0") {
+                saveButton.setText("Save");
+                saveButton.setSelected(false);
+            }
+            else {
+                saveButton.setText("Unsave");
+                saveButton.setSelected(true);
+            }
             setGraphic(gridPane);
         }
 
@@ -101,32 +109,35 @@ public class NodeTypeController extends ListCell<postType>{
 
     @FXML
     private void saveButtonAction(ActionEvent event) throws SQLException {
-        
-        if(saveButton.isSelected()){
-            System.out.println("query hobe");
-            saveButton.setText("Unsave");
-        }
-        else{
-            saveButton.setText("Save");
-            System.out.println("query delete hobe");
-        }
 
 
-        /*System.out.println("clicksssssssssss");
+        JdbcDao jdbc = new JdbcDao();
         String date = dateText.getText();
         String time = timeText.getText();
         String post = postText.getText();
         String name = nameText.getText();
         String ok = "0";
-        System.out.println(date);
-        System.out.println(time);
-        System.out.println(post);
-        System.out.println(name);
 
-        String query = "INSERT INTO important (name,date,time,description,done,reg) VALUES (?,?,?,?,?,?) ";
 
-        JdbcDao jdbc = new JdbcDao();
-        jdbc.insert_important(name,date,time,post,ok,roll,query);*/
+        if(saveButton.isSelected()){
+            System.out.println("query hobe");
+            saveButton.setText("Unsave");
+
+
+            String query = "INSERT INTO important (name,date,time,description,done,reg) VALUES (?,?,?,?,?,?) ";
+
+            jdbc.insert_important(name,date,time,post,ok,roll,query);
+
+
+        }
+        else {
+            saveButton.setText("Save");
+            System.out.println("query delete hobe");
+            String query = "DELETE FROM important WHERE name = ? and date = ? and time = ? and description = ? and done = ? and reg = ?";
+            jdbc.delete_important(name,date,time,post,ok,roll,query);
+        }
+
+
 
 
     }
