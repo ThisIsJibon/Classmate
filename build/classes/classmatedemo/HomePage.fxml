@@ -922,103 +922,6 @@
                         </HBox>
                     </children>
                 </Pane>
-            <Pane fx:id="threadMemberPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;">
-               <children>
-                  <VBox prefHeight="686.0" prefWidth="918.0" spacing="5.0">
-                     <children>
-                        <HBox prefHeight="33.0" prefWidth="918.0" spacing="5.0">
-                           <children>
-                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/icons8_user_100px_1.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thread Members :" wrappingWidth="150.8050308227539">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="threadMembersNumberText" layoutX="36.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="570.0049667358398">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/icons8_remove_administrator_240px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                        <CheckListView fx:id="threadMembersListview" prefHeight="225.0" prefWidth="914.0" />
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="918.0" spacing="5.0">
-                           <children>
-                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@icons/icons8_user_100px_1.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Global Users :" wrappingWidth="726.8049240112305">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Text>
-                              <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/icons8_add_user_male_240px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                        <CheckListView fx:id="globalListView" prefHeight="250.0" prefWidth="914.0" />
-                        <HBox prefHeight="26.0" prefWidth="510.0">
-                           <children>
-                              <PasswordField fx:id="threadAboutMembersPasswordfield" prefHeight="26.0" prefWidth="274.0" promptText="Enter thread password" />
-                           </children>
-                           <VBox.margin>
-                              <Insets left="330.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                           <children>
-                              <JFXButton onAction="#threadButtonAction" prefHeight="58.0" prefWidth="142.0" text="Back">
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/icons8_go_back_128px.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                              <JFXButton layoutX="10.0" layoutY="10.0" onAction="#MembersButtonAction" prefHeight="58.0" prefWidth="142.0" text="Reload">
-                                 <graphic>
-                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@icons/icons8_reboot_100px_1.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="300.0" top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="5.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </Pane>
             <Pane fx:id="aboutThreadPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;">
                <children>
                   <BorderPane prefHeight="683.0" prefWidth="918.0">
@@ -1145,6 +1048,103 @@
                         </HBox>
                      </bottom>
                   </BorderPane>
+               </children>
+            </Pane>
+            <Pane fx:id="threadMemberPane" prefHeight="686.0" prefWidth="918.0" style="-fx-background-color: #EAF0F1;">
+               <children>
+                  <VBox prefHeight="686.0" prefWidth="918.0" spacing="5.0">
+                     <children>
+                        <HBox prefHeight="33.0" prefWidth="918.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8_user_100px_1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Thread Members :" wrappingWidth="150.8050308227539">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="threadMembersNumberText" layoutX="36.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" wrappingWidth="570.0049667358398">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <JFXButton onAction="#removeUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Remove User">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_remove_administrator_240px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <CheckListView fx:id="threadMembersListview" prefHeight="225.0" prefWidth="914.0" />
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="918.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8_user_100px_1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Global Users :" wrappingWidth="726.8049240112305">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <JFXButton onAction="#addUserFromThreadAction" prefHeight="34.0" prefWidth="132.0" text="Add User">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_add_user_male_240px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <CheckListView fx:id="globalListView" prefHeight="225.0" prefWidth="914.0" />
+                        <HBox prefHeight="41.0" prefWidth="583.0">
+                           <children>
+                              <PasswordField fx:id="threadAboutMembersPasswordfield" prefHeight="38.0" prefWidth="274.0" promptText="Enter thread password" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="330.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="54.0" prefWidth="614.0" spacing="50.0">
+                           <children>
+                              <JFXButton onAction="#threadButtonAction" prefHeight="58.0" prefWidth="142.0" text="Back">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_go_back_128px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton layoutX="10.0" layoutY="10.0" onAction="#MembersButtonAction" prefHeight="58.0" prefWidth="142.0" text="Reload">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/icons8_reboot_100px_1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="300.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" top="10.0" />
+                     </padding>
+                  </VBox>
                </children>
             </Pane>
             </children>

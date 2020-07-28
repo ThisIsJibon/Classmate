@@ -20,9 +20,9 @@
             <Font name="French Script MT" size="40.0" />
          </font>
       </Label>
-      <JFXButton layoutX="189.0" layoutY="360.0" text="About" />
-      <JFXButton layoutX="274.0" layoutY="360.0" text="Source" />
-      <JFXButton layoutX="359.0" layoutY="360.0" text="Report" />
+      <JFXButton layoutX="189.0" layoutY="360.0" onAction="#openBrowser" text="About" />
+      <JFXButton layoutX="274.0" layoutY="360.0" onAction="#openBrowser" text="Source" />
+      <JFXButton layoutX="359.0" layoutY="360.0" onAction="#openBrowser" text="Report" />
       <ImageView fitHeight="40.0" fitWidth="49.0" layoutX="22.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/1.png" />

@@ -851,13 +851,13 @@ public class JdbcDao {
                     String date = resultSet.getString("date");
                     String text = resultSet.getString("feed");
                     String time = resultSet.getString("time");
-                    String state = resultSet.getString("state");
+                    //String state = resultSet.getString("state");
                     //list.add(name+"\n"+date+"\n"+text+"\n");
                     list1.add(name);
                     list1.add(date);
                     list1.add(text);
                     list1.add(time);
-                    list1.add(state);
+                    //list1.add(state);
                     list.add(list1);
                 }
                 resultSet.close();
