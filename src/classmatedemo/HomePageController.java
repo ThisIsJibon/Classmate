@@ -263,6 +263,7 @@ public class HomePageController implements Initializable {
      */
     Preferences preferences = Preferences.userRoot();
     public final String email = preferences.get("email", "root");
+
     public String selected;
     public String reg;
     public String name;
@@ -374,6 +375,7 @@ public class HomePageController implements Initializable {
         reg = list.get(5);
 
         System.out.println(reg);
+        System.out.println(email);
 
         homePageInitialize();
     }
@@ -386,12 +388,18 @@ public class HomePageController implements Initializable {
         JdbcDao jdbc = new JdbcDao();
         ArrayList<String> items = jdbc.threadlist(reg, query1);
 
+        if(items.size()==0)
+            query+=" thread_id =0";
+
         for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i));
             if (i == items.size() - 1)
                 query += ("thread_id = \"" + items.get(i) + "\" order by  date desc");
             else
                 query += ("thread_id = \"" + items.get(i) + "\"  OR ");
         }
+        System.out.println(query);
+        System.out.println(query1);
         ArrayList<ArrayList<String>> list = jdbc.home_feed(query);
 
         studentObservableList = FXCollections.observableArrayList();

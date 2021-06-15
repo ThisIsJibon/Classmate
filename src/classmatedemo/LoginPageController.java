@@ -4,6 +4,7 @@ package classmatedemo;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
@@ -39,12 +40,16 @@ public class LoginPageController implements Initializable {
     }
 
     @FXML
-    private void loginbuttonAction(ActionEvent event) throws IOException {
+    private void loginbuttonAction(ActionEvent event) throws IOException, SQLException {
 
         String email = emailField.getText();
         String pass = passField.getText();
 
-        String query = "select *from registration where email = ? and pass = ?";
+        String query = "SELECT * FROM registration where email = ? and pass = ?";
+
+        System.out.println(email);
+        System.out.println(pass);
+        System.out.println(query);
 
         if(JdbcDao.checklogin(email,pass,query)){
 
@@ -56,7 +61,7 @@ public class LoginPageController implements Initializable {
             Scene scene = new Scene(blah);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
-            appStage.setTitle("Classmate.");
+            appStage.setTitle("Classmate");
             appStage.show();
         }
         else{

@@ -408,7 +408,7 @@ public class JdbcDao {
 
     }
 
-    public static boolean checklogin(String email,String pass,String query) throws IOException {
+    public static boolean checklogin(String email,String pass,String query) throws  SQLException{
 
         boolean status = false;
 
@@ -424,10 +424,12 @@ public class JdbcDao {
             preparedStatement.setString(1,email);
             preparedStatement.setString(2,pass);
 
+            System.out.println("succesful connection");
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             status = resultSet.next();
-            preparedStatement.close();
+
             return status;
 
         }
@@ -703,6 +705,7 @@ public class JdbcDao {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while(resultSet.next()){
                   //System.out.println(resultSet.getString("thread_id"));
+                  System.out.println("Successful");
                     list.add(resultSet.getString("thread_id"));
                 }
                 resultSet.close();
