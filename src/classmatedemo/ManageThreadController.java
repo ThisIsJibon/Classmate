@@ -16,8 +16,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import java.io.*;
+import java.util.Scanner;
 
 /**
  * FXML Controller class
@@ -26,6 +31,7 @@ import javafx.stage.Window;
  */
 public class   ManageThreadController implements Initializable {
 
+    public AnchorPane mainAnchorPane;
     @FXML
     private JFXTextField userRegistrationField;
     @FXML
@@ -239,6 +245,18 @@ public class   ManageThreadController implements Initializable {
     }
 
 
+    public void addUserCSVButtonAction(ActionEvent actionEvent) throws FileNotFoundException{
+        FileChooser fileChooser = new FileChooser();
+        Stage primaryStage=(Stage) mainAnchorPane.getScene().getWindow();
+        File csvFile = (File) fileChooser.showOpenDialog(primaryStage);
+        Scanner sc = new Scanner(csvFile);
+        sc.useDelimiter(",");   //sets the delimiter pattern
+        System.out.print("here is CSV output");
 
-
+        while (sc.hasNext())  //returns a boolean value
+        {
+            System.out.print(sc.next());  //find and returns the next complete token from this scanner
+        }
+        sc.close();
+    }
 }
