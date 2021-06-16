@@ -352,7 +352,7 @@ public class JdbcDao {
 
 
 
-    public void insertRecord(String thread_id, String reg,String query) throws IOException {
+    public void Insert_Record (String thread_id, String reg,String query) throws IOException {
 
         // load and register JDBC driver for MySQL
         try {
@@ -491,6 +491,8 @@ public class JdbcDao {
             preparedStatement.setString(3,threadpass);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            System.out.println(preparedStatement);
+
             status = resultSet.next();
             preparedStatement.close();
             return status;
@@ -519,8 +521,8 @@ public class JdbcDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1,reg);
             preparedStatement.setString(2,thread_id);
+            System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             status = resultSet.next();
             preparedStatement.close();
             return status;

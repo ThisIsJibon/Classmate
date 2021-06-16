@@ -121,8 +121,8 @@ public class RegistrationFormController implements Initializable {
         System.out.println(code);
         String msg = "Welcome to Classmate.Your verification code is : "+code;
 
-     //   SendEmail sendemail = new SendEmail();
-      //  sendemail.send(email,msg);
+        SendEmail sendemail = new SendEmail();
+        sendemail.send(email,msg);
 
         ConfirmationForm confirmation = new ConfirmationForm ();
 

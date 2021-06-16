@@ -109,7 +109,7 @@ public class   ManageThreadController implements Initializable {
                 }
                 else{
                     JdbcDao jdbc = new JdbcDao();
-                    jdbc.insertRecord(threadname+"-"+threadyear,reg,insert_query);
+                    jdbc.Insert_Record(threadname+"-"+threadyear,reg,insert_query);
                 }
 
             }
@@ -245,7 +245,7 @@ public class   ManageThreadController implements Initializable {
     }
 
 
-    public void addUserCSVButtonAction(ActionEvent actionEvent) throws FileNotFoundException{
+    public void addUserCSVButtonAction(ActionEvent actionEvent) throws FileNotFoundException,IOException{
         FileChooser fileChooser = new FileChooser();
         Stage primaryStage=(Stage) mainAnchorPane.getScene().getWindow();
         File csvFile = (File) fileChooser.showOpenDialog(primaryStage);
@@ -253,10 +253,67 @@ public class   ManageThreadController implements Initializable {
         sc.useDelimiter(",");   //sets the delimiter pattern
         System.out.print("here is CSV output");
 
+
+        if(threadNameField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please enter your Thread Name");
+            alert.show();
+        }
+
+        else if(threadYearField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("warning");
+            alert.setContentText("Please enter your Thread Year");
+            alert.show();
+        }
+        else if(threadPassField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("warning");
+            alert.setContentText("Please enter your Thread Password");
+            alert.show();
+        }
+
+
+        String check_query = " select * from manage_thread where reg = ? and thread_id = ? ";
+        String query = "select * from thread where threadname = ? and threadyear = ? and threadpass = ?";
+        String insert_query = "INSERT INTO  manage_thread(thread_id,reg) VALUES (?, ?)";
+
+        String threadname = threadNameField.getText();
+        String threadyear = threadYearField.getText();
+        String threadpass = threadPassField.getText();
+        String reg = userRegistrationField.getText();
+
+        if(!JdbcDao.check_thread(threadname,threadyear,threadpass,query)){
+
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("warning");
+            alert.setContentText("Please enter all Information correctly");
+            alert.show();
+
+        }
+
+
+        ArrayList<String>list = new ArrayList<>();
+
         while (sc.hasNext())  //returns a boolean value
         {
-            System.out.print(sc.next());  //find and returns the next complete token from this scanner
+            ///System.out.print(sc.next());  //find and returns the next complete token from this scanner
+            String text=sc.nextLine();
+            System.out.println(text);
+            list.add(text);
+
         }
         sc.close();
+
+        JdbcDao jdbc = new JdbcDao();
+        for(int i=0;i<list.size();i++){
+            System.out.println(list.get(i));
+            if(JdbcDao.check_user(list.get(i),threadname+"-"+threadyear,check_query))
+                System.out.println("already exists");
+            else
+                jdbc.Insert_Record(threadname+"-"+threadyear, list.get(i), insert_query);
+        }
     }
 }

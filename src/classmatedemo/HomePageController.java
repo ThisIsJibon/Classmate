@@ -1417,7 +1417,7 @@ public class HomePageController implements Initializable {
                alert.show();
            }
            else{
-               jdbc.insertRecord(selected,str,insert_query);
+               jdbc.Insert_Record(selected,str,insert_query);
            }
 
 
