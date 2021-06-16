@@ -26,7 +26,7 @@
       <JFXButton fx:id="sighUpButton" layoutX="281.0" layoutY="433.0" onAction="#sighUpButtonAction" prefHeight="33.0" prefWidth="102.0" styleClass="login-button" text="Sign up" />
       <Label layoutX="85.0" layoutY="24.0" prefHeight="47.0" prefWidth="162.0" text="Classmate." textFill="WHITE">
          <font>
-            <Font name="French Script MT" size="40.0" />
+            <Font name="Ink Free" size="24.0"/>
          </font>
       </Label>
       <ImageView fitHeight="40.0" fitWidth="49.0" layoutX="32.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
